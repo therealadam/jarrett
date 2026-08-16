@@ -1,0 +1,8 @@
+<footer class="site-footer">
+  <div class="wrapper">
+    {{ if templates.Exists "partials/microhook-footer.html" }}
+    {{ partial "microhook-footer.html" . }}
+    {{ end }}
+    <p class="attribution">Hosted by <a href="https://micro.blog">Micro.blog</a>.</p>
+  </div>
+</footer>

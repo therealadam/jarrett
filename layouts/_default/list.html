@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="archive h-feed">
+  <h2 class="p-name category-title">{{ .Title }}</h2>
+  {{ with .Description }}
+  <div class="list-description">{{ . | markdownify }}</div>
+  {{ end }}
+  {{ $paginator := .Paginate (where .Pages.ByDate.Reverse "Type" "post") }}
+  {{ range .Paginator.Pages }}
+  {{ partial "post-preview.html" . }}
+  {{ end }}
+</div>
+{{ partial "pagination.html" . }}
+{{ end }}

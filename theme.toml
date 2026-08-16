@@ -1,0 +1,7 @@
+name = "Jarrett"
+license = "MIT"
+description = "A clean, minimal custom theme."
+homepage = "https://github.com/therealadam/jarrett"
+
+[author]
+  name = "Adam"

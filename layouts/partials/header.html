@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="wrapper">
+    <a href="/" class="avatar-link"><img src="{{ .Site.Author.avatar }}" alt="{{ .Site.Title }}" class="profile-photo u-photo" width="64" height="64"></a>
+    <h1 class="site-title p-name"><a class="u-url" href="/">{{ .Site.Title }}</a></h1>
+    {{ with .Site.Params.itunes_description }}
+    <p class="site-description">{{ . | safeHTML }}</p>
+    {{ end }}
+    {{ if .Site.Menus.main }}
+    <nav class="site-nav">
+      <ul>
+        {{ range .Site.Menus.main }}
+        {{ if .Page.Params.redirect_url }}
+        <li><a href="{{ .Page.Params.redirect_url }}">{{ .Name }}</a></li>
+        {{ else }}
+        <li><a href="{{ .URL | relLangURL | safeURL }}">{{ .Name }}</a></li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </nav>
+    {{ end }}
+  </div>
+</header>

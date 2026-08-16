@@ -1,0 +1,9 @@
+{{ define "main" }}
+<div class="posts h-feed">
+  {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") }}
+  {{ range .Paginator.Pages }}
+  {{ partial "post-preview.html" . }}
+  {{ end }}
+</div>
+{{ partial "pagination.html" . }}
+{{ end }}
