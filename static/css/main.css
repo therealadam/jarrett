@@ -172,6 +172,86 @@ a:hover {
   border-radius: 4px;
 }
 
+.e-content h1,
+.e-content h2,
+.e-content h3,
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 1.8em 0 0.5em;
+  text-wrap: balance;
+}
+
+.e-content h1,
+.post-content h1 {
+  font-size: 1.6em;
+}
+
+.e-content h2,
+.post-content h2 {
+  font-size: 1.35em;
+}
+
+.e-content h3,
+.post-content h3 {
+  font-size: 1.1em;
+  font-style: italic;
+}
+
+.e-content h4,
+.e-content h5,
+.e-content h6,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 1.8em 0 0.5em;
+}
+
+.e-content > :first-child,
+.post-content > :first-child {
+  margin-top: 0;
+}
+
+.e-content blockquote,
+.post-content blockquote {
+  position: relative;
+  margin: 1.5em 0;
+  padding: 0;
+  font-style: italic;
+}
+
+.e-content blockquote::before,
+.post-content blockquote::before {
+  content: "";
+  position: absolute;
+  top: 0.3em;
+  bottom: 0.3em;
+  left: -18px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+.e-content blockquote > :first-child,
+.post-content blockquote > :first-child {
+  margin-top: 0;
+}
+
+.e-content blockquote > :last-child,
+.post-content blockquote > :last-child {
+  margin-bottom: 0;
+}
+
 .e-content p:first-child {
   margin-top: 8px;
 }
