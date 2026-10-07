@@ -402,3 +402,57 @@ a:hover {
     transition: none;
   }
 }
+
+/* Newsletter subscribe form */
+
+.embeddable-buttondown-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.embeddable-buttondown-form label {
+  flex-basis: 100%;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.embeddable-buttondown-form input[type="email"] {
+  flex: 1 1 14em;
+  min-width: 0;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.embeddable-buttondown-form input[type="email"]:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.embeddable-buttondown-form input[type="submit"] {
+  padding: 8px 16px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.embeddable-buttondown-form input[type="submit"]:hover,
+.embeddable-buttondown-form input[type="submit"]:focus-visible {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
