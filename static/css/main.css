@@ -90,17 +90,11 @@ a:hover {
   font-size: 1.75rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  margin: 12px 0 4px;
+  margin: 12px 0 16px;
 }
 
 .site-title a {
   color: var(--text);
-}
-
-.site-description {
-  font-style: italic;
-  color: var(--text-muted);
-  margin: 0 0 16px;
 }
 
 .site-nav ul {
