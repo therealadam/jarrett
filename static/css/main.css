@@ -4,7 +4,9 @@
   --bg: #ffffff;
   --accent: #1d4ed8;
   --border: #e5e5e5;
-  --max-width: 640px;
+  --max-width: 680px;
+  --font-serif: Charter, "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,9 +28,11 @@ body {
   padding: 0 20px;
   background: var(--bg);
   color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 18px;
-  line-height: 1.6;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.55;
+  hyphens: auto;
+  -webkit-font-smoothing: antialiased;
 }
 
 .wrapper {
@@ -61,7 +65,9 @@ a:hover {
 }
 
 .site-title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   margin: 12px 0 4px;
 }
 
@@ -70,6 +76,7 @@ a:hover {
 }
 
 .site-description {
+  font-style: italic;
   color: var(--text-muted);
   margin: 0 0 16px;
 }
@@ -85,7 +92,11 @@ a:hover {
 
 .site-nav a {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* Posts */
@@ -104,13 +115,19 @@ a:hover {
 
 .post-date,
 .post-header .post-date {
-  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--text-muted);
 }
 
 .post-title {
   margin: 8px 0 12px;
-  font-size: 1.3rem;
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
 }
 
 .post-title a,
@@ -143,7 +160,10 @@ a:hover {
 }
 
 .post-tags a {
-  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--text-muted);
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -170,7 +190,9 @@ a:hover {
 /* Pages */
 
 .page h2 {
-  font-size: 1.6rem;
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
 }
 
 /* Footer */
@@ -181,7 +203,8 @@ a:hover {
   padding: 24px 0 48px;
   text-align: center;
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
 }
 
 .site-footer a {
