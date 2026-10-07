@@ -7,6 +7,7 @@
   --tag: #24837b;
   --selection: #e6e4d9;
   --border: #e6e4d9;
+  --rainbow: linear-gradient(90deg, #af3029, #bc5215, #ad8301, #66800b, #24837b, #205ea6, #5e409d, #a02f6f);
   --max-width: 680px;
   --font-serif: Charter, "Iowan Old Style", "Source Serif Pro", Georgia, serif;
   --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -22,6 +23,7 @@
     --tag: #879a39;
     --selection: #3a3150;
     --border: #2f2a3d;
+    --rainbow: linear-gradient(90deg, #d14d41, #da702c, #d0a215, #879a39, #3aa99f, #4385be, #8b7ec8, #ce5d97);
   }
 }
 
@@ -34,6 +36,7 @@
   --tag: #879a39;
   --selection: #3a3150;
   --border: #2f2a3d;
+  --rainbow: linear-gradient(90deg, #d14d41, #da702c, #d0a215, #879a39, #3aa99f, #4385be, #8b7ec8, #ce5d97);
 }
 
 * {
@@ -50,6 +53,18 @@ body {
   line-height: 1.55;
   hyphens: auto;
   -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--rainbow);
+  pointer-events: none;
+  z-index: 10;
 }
 
 .wrapper {
