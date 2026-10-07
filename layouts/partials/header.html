@@ -1,4 +1,5 @@
 <header class="site-header">
+  {{ partial "theme-switcher.html" . }}
   <div class="wrapper">
     <a href="/" class="avatar-link"><img src="{{ .Site.Author.avatar }}" alt="{{ .Site.Title }}" class="profile-photo u-photo" width="64" height="64"></a>
     <h1 class="site-title p-name"><a class="u-url" href="/">{{ .Site.Title }}</a></h1>
