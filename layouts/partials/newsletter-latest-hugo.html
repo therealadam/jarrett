@@ -1,0 +1,16 @@
+{{/* Latest newsletter issues, fetched from Buttondown's RSS when the site builds. */}}
+{{/* Fetch errors fail the build on this Hugo version, so there is no .Err guard. */}}
+<section class="newsletter-latest">
+  <h3>Latest issues (Hugo build-time)</h3>
+  {{ with resources.GetRemote "https://buttondown.com/therealadam/rss" }}
+  {{ $feed := . | transform.Unmarshal }}
+  <ul>
+    {{ range first 3 $feed.channel.item }}
+    <li>
+      <a href="{{ .link }}">{{ .title }}</a>
+      <time datetime="{{ .pubDate }}">{{ (time .pubDate).Format "Jan 2, 2006" }}</time>
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</section>
