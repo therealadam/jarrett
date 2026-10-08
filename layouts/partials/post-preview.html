@@ -7,7 +7,7 @@
   <div class="p-summary">
     {{ $splitContents := split .RawContent "<!--more-->" }}
     {{ index $splitContents 0 | markdownify }}
-    <p><a class="read-more" href="{{ .Permalink }}">Read more →</a></p>
+    <p><a class="read-more" href="{{ .Permalink }}">Read more<span class="visually-hidden"> about {{ with .Title }}{{ . }}{{ else }}this post{{ end }}</span> →</a></p>
   </div>
   {{ else if .Params.custom_summary }}
   <div class="p-summary">

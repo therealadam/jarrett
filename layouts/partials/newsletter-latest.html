@@ -8,7 +8,7 @@
     {{ range first 3 $feed.channel.item }}
     <li>
       <a href="{{ .link }}">{{ .title }}</a>
-      <time datetime="{{ .pubDate }}">{{ (time .pubDate).Format "Jan 2, 2006" }}</time>
+      <time datetime="{{ (time .pubDate).Format "2006-01-02" }}">{{ (time .pubDate).Format "Jan 2, 2006" }}</time>
       <p class="excerpt">{{ .description | plainify | truncate 280 }}</p>
     </li>
     {{ end }}

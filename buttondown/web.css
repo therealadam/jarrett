@@ -11,15 +11,15 @@
   --color-background-card: #f2f0e5;
   --color-background-offset: #e6e4d9;
   --color-foreground: #100f0f;
-  --color-foreground-offset: #6f6e69;
-  --color-foreground-offset-2: #6f6e69;
+  --color-foreground-offset: #66655f;
+  --color-foreground-offset-2: #66655f;
 
   --font-brand: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-prose: Charter, "Iowan Old Style", "Source Serif Pro", Georgia, serif;
   --width-content: 680px;
 
   --jarrett-accent-hover: #5e409d;
-  --jarrett-tag: #24837b;
+  --jarrett-tag: #1f766f;
   --jarrett-rainbow: linear-gradient(90deg, #af3029, #bc5215, #ad8301, #66800b, #24837b, #205ea6, #5e409d, #a02f6f);
 }
 
@@ -30,8 +30,8 @@
     --color-background-card: #221d2e;
     --color-background-offset: #2f2a3d;
     --color-foreground: #cecdc3;
-    --color-foreground-offset: #878580;
-    --color-foreground-offset-2: #878580;
+    --color-foreground-offset: #8f8d87;
+    --color-foreground-offset-2: #8f8d87;
 
     --jarrett-accent-hover: #ce5d97;
     --jarrett-tag: #879a39;
@@ -70,6 +70,21 @@ a {
   text-decoration: none;
 }
 
+/* Underline links in running text; in dark mode the accent is too close to body text to rely on color */
+.email-body a:not(.buttondown-button):not(.buttondown-custom-button) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-action);
+  outline-offset: 2px;
+}
+
 a:hover {
   color: var(--jarrett-accent-hover);
   text-decoration: underline;
@@ -85,8 +100,10 @@ a:hover {
 }
 
 .header-navigation-link {
+  display: inline-block;
+  padding: 6px 0;
   font-family: var(--font-brand);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -125,7 +142,7 @@ a:hover {
 .email-metadata,
 .email-detail-date {
   font-family: var(--font-brand);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-foreground-offset);
@@ -174,8 +191,7 @@ a:hover {
 }
 
 /* Blockquotes: italic with a soft accent bar in the margin */
-.email-body blockquote,
-.email-body [data-blockquote-style] {
+.email-body blockquote {
   position: relative;
   margin: 1.5em 0;
   padding: 0;
@@ -228,6 +244,8 @@ a:hover {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 4px;
+  /* Buttondown's default white text fails contrast on the dark-mode gold accent */
+  color: var(--color-background) !important;
 }
 
 .buttondown-button:hover,
@@ -243,13 +261,12 @@ input[type="text"] {
   font-size: 0.9rem;
   color: var(--color-foreground);
   background: transparent;
-  border: 1px solid var(--color-background-offset);
+  border: 1px solid var(--color-foreground-offset);
   border-radius: 4px;
 }
 
 input[type="email"]:focus,
 input[type="text"]:focus {
-  outline: none;
   border-color: var(--color-action);
 }
 
@@ -257,7 +274,7 @@ input[type="text"]:focus {
 
 .related-emails-header {
   font-family: var(--font-brand);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;

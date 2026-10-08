@@ -1,11 +1,11 @@
 {{ $paginator := .Paginator }}
 {{ if or $paginator.HasPrev $paginator.HasNext }}
-<div class="post-nav">
+<nav class="post-nav" aria-label="Pagination">
   {{ if $paginator.HasPrev }}
   <span class="prev"><a href="{{ $paginator.Prev.URL }}">← Newer Posts</a></span>
   {{ end }}
   {{ if $paginator.HasNext }}
   <span class="next"><a href="{{ $paginator.Next.URL }}">Older Posts →</a></span>
   {{ end }}
-</div>
+</nav>
 {{ end }}
