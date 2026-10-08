@@ -1,0 +1,286 @@
+/*
+ * Jarrett theme for Buttondown archives (the "web" CSS).
+ * Paste into Buttondown → Settings → Archives → Custom CSS,
+ * or set the `web_css` field on the newsletter via the API.
+ * Palette mirrors static/css/main.css (Flexoki-based).
+ */
+
+:root {
+  --color-action: #bc5215;
+  --color-background: #fffcf0;
+  --color-background-card: #f2f0e5;
+  --color-background-offset: #e6e4d9;
+  --color-foreground: #100f0f;
+  --color-foreground-offset: #6f6e69;
+  --color-foreground-offset-2: #6f6e69;
+
+  --font-brand: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-prose: Charter, "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+  --width-content: 680px;
+
+  --jarrett-accent-hover: #5e409d;
+  --jarrett-tag: #24837b;
+  --jarrett-rainbow: linear-gradient(90deg, #af3029, #bc5215, #ad8301, #66800b, #24837b, #205ea6, #5e409d, #a02f6f);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root.supports-dark-mode {
+    --color-action: #d0a215;
+    --color-background: #1a1623;
+    --color-background-card: #221d2e;
+    --color-background-offset: #2f2a3d;
+    --color-foreground: #cecdc3;
+    --color-foreground-offset: #878580;
+    --color-foreground-offset-2: #878580;
+
+    --jarrett-accent-hover: #ce5d97;
+    --jarrett-tag: #879a39;
+    --jarrett-rainbow: linear-gradient(90deg, #d14d41, #da702c, #d0a215, #879a39, #3aa99f, #4385be, #8b7ec8, #ce5d97);
+  }
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-prose);
+  font-size: 20px;
+  line-height: 1.55;
+  hyphens: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Rainbow bar across the top */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--jarrett-rainbow);
+  pointer-events: none;
+  z-index: 10;
+}
+
+::selection {
+  background: var(--color-background-offset);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--jarrett-accent-hover);
+  text-decoration: underline;
+}
+
+/* Header */
+
+.header-brand-name,
+.newsletter-name {
+  font-family: var(--font-brand);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.header-navigation-link {
+  font-family: var(--font-brand);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-foreground-offset);
+}
+
+.header-navigation-link:hover {
+  color: var(--jarrett-accent-hover);
+  text-decoration: none;
+}
+
+/* Archive index and post headers */
+
+.email-list .email {
+  border-bottom: 1px solid var(--color-background-offset);
+  padding-bottom: 1.5em;
+}
+
+.email-list .email:last-child {
+  border-bottom: none;
+}
+
+.email-title,
+.subject {
+  font-family: var(--font-prose);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.email-link:hover .email-title {
+  color: var(--jarrett-accent-hover);
+}
+
+.email-metadata,
+.email-detail-date {
+  font-family: var(--font-brand);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-foreground-offset);
+}
+
+.description {
+  color: var(--color-foreground-offset);
+}
+
+/* Post body */
+
+.email-body {
+  font-family: var(--font-prose);
+}
+
+.email-body h1,
+.email-body h2,
+.email-body h3 {
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 1.8em 0 0.5em;
+  text-wrap: balance;
+}
+
+.email-body h1 { font-size: 1.6em; }
+.email-body h2 { font-size: 1.35em; }
+.email-body h3 { font-size: 1.1em; font-style: italic; }
+
+.email-body h4,
+.email-body h5,
+.email-body h6 {
+  font-family: var(--font-brand);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-foreground-offset);
+  margin: 1.8em 0 0.5em;
+}
+
+.email-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Blockquotes: italic with a soft accent bar in the margin */
+.email-body blockquote,
+.email-body [data-blockquote-style] {
+  position: relative;
+  margin: 1.5em 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-style: italic;
+}
+
+.email-body blockquote::before {
+  content: "";
+  position: absolute;
+  top: 0.3em;
+  bottom: 0.3em;
+  left: -18px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--color-action);
+  opacity: 0.6;
+}
+
+.email-body blockquote > :first-child { margin-top: 0; }
+.email-body blockquote > :last-child { margin-bottom: 0; }
+
+.email-body hr {
+  border: none;
+  border-top: 1px solid var(--color-background-offset);
+  margin: 2em 0;
+}
+
+.email-body code,
+.email-body pre {
+  font-size: 0.85em;
+}
+
+.email-body pre {
+  background: var(--color-background-card);
+  border-radius: 4px;
+  padding: 12px 16px;
+  overflow-x: auto;
+}
+
+/* Subscribe buttons and inputs */
+
+.buttondown-button,
+.archive__button,
+.archive__button--subscribe,
+.header-navigation-link--subscribe {
+  font-family: var(--font-brand);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+.buttondown-button:hover,
+.archive__button:hover {
+  background-color: var(--jarrett-accent-hover) !important;
+  border-color: var(--jarrett-accent-hover) !important;
+  text-decoration: none;
+}
+
+input[type="email"],
+input[type="text"] {
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--color-foreground);
+  background: transparent;
+  border: 1px solid var(--color-background-offset);
+  border-radius: 4px;
+}
+
+input[type="email"]:focus,
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--color-action);
+}
+
+/* Related emails, footer */
+
+.related-emails-header {
+  font-family: var(--font-brand);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-foreground-offset);
+}
+
+.related-email {
+  border-bottom: 1px solid var(--color-background-offset);
+}
+
+.related-email-date {
+  font-family: var(--font-brand);
+  font-size: 0.75rem;
+  color: var(--color-foreground-offset);
+}
+
+.footer {
+  font-family: var(--font-brand);
+  font-size: 0.75rem;
+  color: var(--color-foreground-offset-2);
+  border-top: 1px solid var(--color-background-offset);
+}
+
+.footer a {
+  color: var(--color-foreground-offset-2);
+}

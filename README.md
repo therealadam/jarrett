@@ -13,6 +13,10 @@ A custom [micro.blog](https://micro.blog) theme, synced via GitHub.
 - `static/css/main.css` — all styling
 - `theme.toml` / `config.json` — theme metadata and Hugo config
 
+## Buttondown
+
+`buttondown/web.css` is the matching stylesheet for Buttondown newsletter archives. Copy it into **Settings → Archives → Custom CSS** (paid feature), or set the newsletter's `web_css` field via the Buttondown API. It overrides Buttondown's design tokens (`--color-action`, `--font-prose`, etc.) so it adapts to Buttondown's dark mode.
+
 ## Updating the live site
 
 1. Edit files in this repo, commit, push to `main`.
