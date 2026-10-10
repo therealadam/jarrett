@@ -1,0 +1,31 @@
+# Local preview site for the theme in the parent directory (not used by micro.blog).
+baseURL = "/"
+title = "Jarrett Preview"
+languageCode = "en-us"
+paginate = 20
+disableKinds = ["RSS", "sitemap", "robotsTXT"]
+
+[taxonomies]
+  category = "categories"
+
+[params]
+  theme_seconds = "preview"
+  itunes_description = "Preview of the Jarrett micro.blog theme."
+
+[author]
+  name = "Adam"
+
+# Use the repo's layouts and static files as the theme.
+[module]
+  [[module.mounts]]
+    source = "../layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "../static"
+    target = "static"
+  [[module.mounts]]
+    source = "content"
+    target = "content"

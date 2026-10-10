@@ -1,0 +1,5 @@
+services:
+  preview:
+    command: hugo server --source .preview --bind 0.0.0.0 --port $PORT --appendPort=false --disableFastRender --navigateToChanged
+    portal: true
+    title: Theme preview
