@@ -2,7 +2,7 @@
 # Installs Hugo (extended) for previewing the theme with `hugo server`.
 set -euo pipefail
 
-HUGO_VERSION="0.123.8"
+HUGO_VERSION="0.117.0"
 bin_dir="$HOME/.local/bin"
 
 if [ "$("$bin_dir/hugo" version 2>/dev/null | grep -o 'v[0-9.]*' | head -1)" != "v$HUGO_VERSION" ]; then
