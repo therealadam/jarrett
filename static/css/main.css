@@ -555,7 +555,7 @@ input:focus-visible {
 
 /* Archive */
 
-.archive-header h2 {
+.archive-title {
   font-size: 2rem;
   font-weight: 500;
   letter-spacing: -0.015em;
@@ -858,4 +858,496 @@ input:focus-visible {
   font-size: 0.7rem;
   font-weight: 600;
   text-align: center;
+}
+
+/* Archive: classic */
+
+.archive-classic .h-entry {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+/* Archive: almanac */
+
+.almanac-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.almanac-legend span {
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  border-radius: 2px;
+}
+
+.almanac-legend span:first-child {
+  margin-left: 0;
+}
+
+.almanac-legend .is-titled,
+.almanac-days .is-titled {
+  background: var(--accent);
+}
+
+.almanac-legend .is-note,
+.almanac-days .is-note {
+  background: var(--tag);
+}
+
+.almanac-legend .is-photo {
+  background: var(--rainbow);
+}
+
+.almanac-year h3 {
+  margin: 40px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.6rem;
+  font-weight: 500;
+  font-variant-numeric: oldstyle-nums;
+}
+
+.almanac-year h3 span {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.almanac-months {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px 24px;
+}
+
+.almanac-month h4 {
+  margin: 0 0 6px;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.almanac-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.almanac-days li {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--border);
+}
+
+.almanac-days a {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: transform 0.15s ease;
+}
+
+.almanac-days img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.almanac-days .is-many::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+
+.almanac-days a:hover,
+.almanac-days a:focus-visible {
+  z-index: 2;
+  transform: scale(2.6);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+}
+
+/* Archive: index */
+
+.index-letters ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2px;
+  margin: 8px 0 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.index-letters a,
+.index-letters span {
+  display: inline-block;
+  min-width: 24px;
+  padding: 4px 0;
+  text-align: center;
+}
+
+.index-letters span {
+  color: var(--border);
+}
+
+.index-letter {
+  scroll-margin-top: 16px;
+}
+
+.index-letter h3 {
+  margin: 32px 0 8px;
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.index-letter ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+@media (min-width: 600px) {
+  .index-letter ul {
+    columns: 2;
+    column-gap: 32px;
+  }
+}
+
+.index-letter li {
+  break-inside: avoid;
+  padding: 3px 0 3px 1em;
+  text-indent: -1em;
+  color: var(--text-muted);
+}
+
+.index-letter a {
+  color: var(--text);
+}
+
+.index-letter .is-note a {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.index-letter time {
+  font-size: 0.65rem;
+}
+
+/* Archive: quilt */
+
+.quilt {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-auto-rows: 80px;
+  grid-auto-flow: dense;
+  gap: 3px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quilt li {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.quilt a {
+  display: block;
+  height: 100%;
+  padding: 6px 8px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.quilt-month {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  scroll-margin-top: 16px;
+}
+
+.quilt-month span {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  letter-spacing: 0;
+  color: var(--text);
+}
+
+.quilt-titled {
+  grid-column: span 2;
+}
+
+.quilt-titled.is-long {
+  grid-row: span 2;
+}
+
+.quilt-titled a {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  height: auto;
+  max-height: 100%;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #fffcf0;
+}
+
+.quilt-titled.is-long a {
+  -webkit-line-clamp: 7;
+  font-size: 1.2rem;
+}
+
+.quilt-titled[data-color="red"] { background: #af3029; }
+.quilt-titled[data-color="orange"] { background: #bc5215; }
+.quilt-titled[data-color="yellow"] { background: #8e6b01; }
+.quilt-titled[data-color="green"] { background: #536907; }
+.quilt-titled[data-color="cyan"] { background: #1c6c66; }
+.quilt-titled[data-color="blue"] { background: #205ea6; }
+.quilt-titled[data-color="purple"] { background: #5e409d; }
+.quilt-titled[data-color="magenta"] { background: #a02f6f; }
+
+.quilt-note {
+  background: var(--selection);
+}
+
+.quilt-note a {
+  font-size: 0.6rem;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.quilt-photo a {
+  padding: 0;
+}
+
+.quilt-photo.is-many {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.quilt-photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.quilt-photo .count {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgb(16 15 15 / 0.65);
+  color: #fffcf0;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.quilt li:hover {
+  z-index: 1;
+  outline: 3px solid var(--text);
+}
+
+/* Archive: receipt */
+
+.receipt {
+  --paper: #fffef8;
+  --ink: #100f0f;
+  position: relative;
+  max-width: 26rem;
+  margin: 32px auto 48px;
+  padding: 24px 20px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+  hyphens: none;
+  box-shadow: 0 6px 20px rgb(16 15 15 / 0.15);
+  transform: rotate(-0.6deg);
+  transform-origin: top center;
+}
+
+.receipt::before,
+.receipt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(-45deg, transparent 6px, var(--paper) 0), linear-gradient(45deg, transparent 6px, var(--paper) 0);
+  background-size: 12px 12px;
+}
+
+.receipt::before {
+  top: -10px;
+  transform: rotate(180deg);
+}
+
+.receipt::after {
+  bottom: -10px;
+}
+
+.receipt p {
+  margin: 0;
+}
+
+.receipt a {
+  color: var(--ink);
+}
+
+.receipt a:hover {
+  color: #5e409d;
+}
+
+.receipt time {
+  font: inherit;
+  letter-spacing: 0;
+  color: inherit;
+}
+
+.receipt-head {
+  text-align: center;
+}
+
+.receipt-store {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.receipt .archive-years {
+  margin: 12px 0;
+  padding: 8px 0;
+  border-top: 1px dashed var(--ink);
+  border-bottom: 1px dashed var(--ink);
+}
+
+.receipt .archive-years ul {
+  justify-content: center;
+  gap: 0 10px;
+}
+
+.receipt .archive-years a {
+  font: inherit;
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.receipt-month {
+  scroll-margin-top: 16px;
+}
+
+.receipt-month h3 {
+  margin: 16px 0 4px;
+  font-size: inherit;
+  font-weight: 700;
+  text-align: center;
+}
+
+.receipt-month ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.receipt-month li {
+  display: grid;
+  grid-template-columns: 3.5em 1fr auto;
+  gap: 8px;
+}
+
+.receipt-month li a {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.receipt .amt {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.receipt-subtotal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px !important;
+  padding-top: 4px;
+  border-top: 1px dashed var(--ink);
+}
+
+.receipt-total {
+  margin: 20px 0 0;
+  padding: 8px 0;
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+}
+
+.receipt-total div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.receipt-total dt,
+.receipt-total dd {
+  margin: 0;
+}
+
+.receipt-total div:nth-child(-n+2) {
+  font-weight: 700;
+}
+
+.receipt-foot {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.barcode {
+  height: 48px;
+  margin: 12px 16px;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 8px, var(--ink) 8px 11px, transparent 11px 12px, var(--ink) 12px 13px, transparent 13px 17px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .almanac-days a {
+    transition: none;
+  }
 }

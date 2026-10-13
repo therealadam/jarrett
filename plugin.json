@@ -1,0 +1,13 @@
+{
+	"version": "1.0.0",
+	"title": "Jarrett",
+	"description": "A clean, minimal custom theme.",
+	"fields": [
+		{
+			"field": "params.archive_style",
+			"label": "Archive layout: classic, ledger, rhythm, lanes, almanac, index, quilt, receipt (preview each at /archive/<layout>/)",
+			"placeholder": "classic",
+			"type": "string"
+		}
+	]
+}

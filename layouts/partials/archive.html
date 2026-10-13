@@ -1,24 +1,12 @@
-{{/* Archive grouped by month. The context is the style: ledger, rhythm, or lanes. */}}
+{{/* Archive page. The context is the layout name; unknown names fall back to classic so a typo can't break the build. */}}
 {{ $posts := (where site.RegularPages "Type" "post").ByDate.Reverse }}
-{{ $style := . }}
+{{ $style := lower (trim (string .) " ") }}
+{{ if not (templates.Exists (printf "partials/archive/%s.html" $style)) }}{{ $style = "classic" }}{{ end }}
 <div class="archive archive-{{ $style }} h-feed">
-  <header class="archive-header">
-    <h2 class="p-name">Archive</h2>
-    <nav class="archive-years" aria-label="Years">
-      <ul>
-        {{ range $posts.GroupByDate "2006" }}
-        <li><a href="#y{{ .Key }}">{{ .Key }}</a></li>
-        {{ end }}
-      </ul>
-    </nav>
-  </header>
-  {{ $year := "" }}
-  {{ range $posts.GroupByDate "January 2006" }}
-  {{ $y := (index .Pages 0).Date.Format "2006" }}
-  <section class="archive-month"{{ if ne $y $year }} id="y{{ $y }}"{{ end }}>
-    {{ $year = $y }}
-    <h3>{{ .Key }}</h3>
-    {{ partial (printf "archive/%s.html" $style) .Pages }}
-  </section>
+  <h2 class="archive-title p-name">Archive</h2>
+  {{ if in (slice "ledger" "rhythm" "lanes") $style }}
+  {{ partial "archive/months.html" (dict "posts" $posts "style" $style) }}
+  {{ else }}
+  {{ partial (printf "archive/%s.html" $style) $posts }}
   {{ end }}
 </div>

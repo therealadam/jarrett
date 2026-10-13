@@ -1,0 +1,41 @@
+{{/* Index: an A–Z back-of-the-book index. Titles are inverted ("Weekend in Carmel, A"), notes are filed by their first words, photos under P. */}}
+{{ $items := slice }}
+{{ range . }}
+{{ $e := partial "archive/entry.html" . }}
+{{ $n := len $e.photos }}
+{{ $label := "" }}
+{{ if .Title }}
+{{ $label = replaceRE `^(?i)(the|an|a)\s+(.+)$` "$2, $1" .Title }}
+{{ else }}
+{{ $label = $e.text | truncate 60 | default (cond (gt $n 1) (printf "Photos (%d)" $n) "Photo") }}
+{{ end }}
+{{ $key := lower $label | replaceRE `^[^\p{L}\p{N}]+` "" }}
+{{ $items = $items | append (dict "key" $key "label" $label "page" . "kind" $e.kind) }}
+{{ end }}
+{{ $items = sort $items "key" }}
+
+{{ $groups := newScratch }}{{ $letters := slice }}
+{{ range $items }}
+{{ $l := upper (substr .key 0 1) }}
+{{ if not (findRE `^[A-Z]$` $l) }}{{ $l = "#" }}{{ end }}
+{{ if not (in $letters $l) }}{{ $letters = $letters | append $l }}{{ end }}
+{{ $groups.Add $l (slice .) }}
+{{ end }}
+
+<nav class="index-letters" aria-label="Letters">
+  <ul>
+    {{ range (split "#ABCDEFGHIJKLMNOPQRSTUVWXYZ" "") }}
+    <li>{{ if in $letters . }}<a href="#letter-{{ cond (eq . "#") "num" . }}">{{ . }}</a>{{ else }}<span aria-hidden="true">{{ . }}</span>{{ end }}</li>
+    {{ end }}
+  </ul>
+</nav>
+{{ range $letters }}
+<section class="index-letter" id="letter-{{ cond (eq . "#") "num" . }}">
+  <h3>{{ . }}</h3>
+  <ul>
+    {{ range $groups.Get . }}
+    <li class="h-entry is-{{ .kind }}"><a class="u-url{{ if eq .kind "titled" }} p-name{{ end }}" href="{{ .page.Permalink }}">{{ .label }}</a>, <time class="dt-published" datetime="{{ .page.Date.Format "2006-01-02T15:04:05-0700" }}">{{ .page.Date.Format "Jan 2006" }}</time></li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

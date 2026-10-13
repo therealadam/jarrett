@@ -1,0 +1,42 @@
+{{/* Almanac: a wall calendar per year. Days with essays glow in the accent color, notes in the tag color, and photo days show the photo. */}}
+{{ $days := newScratch }}
+{{ range . }}{{ $days.Add (.Date.Format "2006-01-02") (slice .) }}{{ end }}
+{{ partial "archive/years.html" . }}
+<p class="almanac-legend" aria-hidden="true"><span class="is-titled"></span> Essay <span class="is-note"></span> Note <span class="is-photo"></span> Photo</p>
+{{ range .GroupByDate "2006" }}
+{{ $year := .Key }}
+<section class="almanac-year" id="y{{ $year }}">
+  <h3>{{ $year }} <span>{{ len .Pages }} posts</span></h3>
+  <div class="almanac-months">
+    {{ range seq 12 }}
+    {{ $first := time (printf "%s-%02d-01" $year .) }}
+    {{ if le $first.Unix now.Unix }}
+    <div class="almanac-month">
+      <h4>{{ $first.Format "January" }}</h4>
+      <ol class="almanac-days">
+        {{ range $i, $_ := seq ($first.AddDate 0 1 -1).Day }}
+        {{ $d := $first.AddDate 0 0 $i }}
+        <li{{ if eq $i 0 }} style="grid-column-start: {{ add (int (printf "%d" $d.Weekday)) 1 }}"{{ end }}>
+          {{ with $days.Get ($d.Format "2006-01-02") }}
+          {{ $kind := "note" }}{{ $thumb := "" }}{{ $labels := slice }}
+          {{ range . }}
+          {{ $e := partial "archive/entry.html" . }}
+          {{ if and $e.photos (not $thumb) }}{{ $thumb = index $e.photos 0 }}{{ end }}
+          {{ if eq $e.kind "titled" }}{{ $kind = "titled" }}{{ end }}
+          {{ $labels = $labels | append (.Title | default ($e.text | truncate 60) | default "Photo") }}
+          {{ end }}
+          {{ $label := delimit $labels " · " }}
+          <a href="{{ (index . 0).Permalink }}" class="is-{{ if $thumb }}photo{{ else }}{{ $kind }}{{ end }}{{ if gt (len .) 1 }} is-many{{ end }}" title="{{ $d.Format "Jan 2" }}: {{ $label }}">
+            {{ with $thumb }}<img src="{{ partial "archive/thumb.html" (dict "src" . "width" 100) }}" alt="" loading="lazy">{{ end }}
+            <span class="visually-hidden">{{ $d.Format "January 2" }}: {{ $label }}</span>
+          </a>
+          {{ end }}
+        </li>
+        {{ end }}
+      </ol>
+    </div>
+    {{ end }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}

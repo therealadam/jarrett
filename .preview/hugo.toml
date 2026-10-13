@@ -16,6 +16,13 @@ disableKinds = ["RSS", "sitemap", "robotsTXT"]
   isHTML = true
   notAlternative = true
 
+[outputFormats.ArchiveClassic]
+  mediaType = "text/html"
+  path = "archive/classic"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
 [outputFormats.ArchiveLedger]
   mediaType = "text/html"
   path = "archive/ledger"
@@ -37,14 +44,43 @@ disableKinds = ["RSS", "sitemap", "robotsTXT"]
   isHTML = true
   notAlternative = true
 
+[outputFormats.ArchiveAlmanac]
+  mediaType = "text/html"
+  path = "archive/almanac"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
+[outputFormats.ArchiveIndex]
+  mediaType = "text/html"
+  path = "archive/index"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
+[outputFormats.ArchiveQuilt]
+  mediaType = "text/html"
+  path = "archive/quilt"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
+[outputFormats.ArchiveReceipt]
+  mediaType = "text/html"
+  path = "archive/receipt"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
 [outputs]
-  home = ["HTML", "ArchiveHTML", "ArchiveLedger", "ArchiveRhythm", "ArchiveLanes"]
+  home = ["HTML", "ArchiveHTML", "ArchiveClassic", "ArchiveLedger", "ArchiveRhythm", "ArchiveLanes", "ArchiveAlmanac", "ArchiveIndex", "ArchiveQuilt", "ArchiveReceipt"]
 
 [markup.goldmark.renderer]
   unsafe = true
 
 [params]
   theme_seconds = "preview"
+  archive_style = "classic"
   itunes_description = "Preview of the Jarrett micro.blog theme."
 
 [author]

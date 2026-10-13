@@ -1,0 +1,55 @@
+{{/* Receipt: the whole archive as a thermal-paper receipt. Word counts are the prices; E, N, and P are the "tax codes" for essays, notes, and photo posts. */}}
+{{ $words := 0 }}{{ $essays := 0 }}{{ $notes := 0 }}{{ $photoPosts := 0 }}{{ $photos := 0 }}
+{{ $oldest := index (last 1 .) 0 }}{{ $newest := index . 0 }}
+<div class="receipt">
+  <header class="receipt-head">
+    <p class="receipt-store">{{ site.Title }}</p>
+    <p>{{ replaceRE `^https?://([^/]+)/?.*$` "$1" site.BaseURL }}</p>
+    <p>Archive of record</p>
+    <p>{{ $oldest.Date.Format "01/02/2006" }} – {{ $newest.Date.Format "01/02/2006" }}</p>
+    <p>Cashier: {{ site.Author.name | default "Adam" }}</p>
+  </header>
+  {{ partial "archive/years.html" . }}
+  {{ $year := "" }}
+  {{ range .GroupByDate "January 2006" }}
+  {{ $y := (index .Pages 0).Date.Format "2006" }}
+  {{ $mWords := 0 }}
+  <section class="receipt-month"{{ if ne $y $year }} id="y{{ $y }}"{{ end }}>
+    {{ $year = $y }}
+    <h3>** {{ .Key }} **</h3>
+    <ol>
+      {{ range .Pages }}
+      {{ $e := partial "archive/entry.html" . }}
+      {{ $n := len $e.photos }}
+      {{ $code := "N" }}
+      {{ if eq $e.kind "titled" }}{{ $code = "E" }}{{ $essays = add $essays 1 }}
+      {{ else if eq $e.kind "note" }}{{ $notes = add $notes 1 }}
+      {{ else }}{{ $code = "P" }}{{ $photoPosts = add $photoPosts 1 }}{{ end }}
+      {{ $photos = add $photos $n }}
+      {{ $words = add $words .WordCount }}{{ $mWords = add $mWords .WordCount }}
+      <li class="h-entry">
+        <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">{{ .Date.Format "01/02" }}</time>
+        <a class="u-url" href="{{ .Permalink }}">{{ if gt $n 0 }}[IMG{{ if gt $n 1 }}×{{ $n }}{{ end }}] {{ end }}{{ .Title | default $e.text | truncate 60 }}</a>
+        <span class="amt">{{ lang.FormatNumber 0 .WordCount }} {{ $code }}</span>
+      </li>
+      {{ end }}
+    </ol>
+    <p class="receipt-subtotal"><span>Subtotal {{ len .Pages }} item{{ if ne (len .Pages) 1 }}s{{ end }}</span> <span>{{ lang.FormatNumber 0 $mWords }}</span></p>
+  </section>
+  {{ end }}
+  <dl class="receipt-total">
+    <div><dt>Total posts</dt><dd>{{ lang.FormatNumber 0 (len .) }}</dd></div>
+    <div><dt>Total words</dt><dd>{{ lang.FormatNumber 0 $words }}</dd></div>
+    <div><dt>E Essays</dt><dd>{{ lang.FormatNumber 0 $essays }}</dd></div>
+    <div><dt>N Notes</dt><dd>{{ lang.FormatNumber 0 $notes }}</dd></div>
+    <div><dt>P Photo posts</dt><dd>{{ lang.FormatNumber 0 $photoPosts }}</dd></div>
+    <div><dt>Photos</dt><dd>{{ lang.FormatNumber 0 $photos }}</dd></div>
+    <div><dt>Avg words/post</dt><dd>{{ lang.FormatNumber 0 (div $words (len .)) }}</dd></div>
+    <div><dt>Change due</dt><dd>0.00</dd></div>
+  </dl>
+  <footer class="receipt-foot">
+    <p>Thank you for reading</p>
+    <div class="barcode" aria-hidden="true"></div>
+    <p>Please come again</p>
+  </footer>
+</div>

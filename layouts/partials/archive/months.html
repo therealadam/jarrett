@@ -1,0 +1,12 @@
+{{/* Groups posts by month and renders each month with the ledger, rhythm, or lanes partial. */}}
+{{ partial "archive/years.html" .posts }}
+{{ $style := .style }}
+{{ $year := "" }}
+{{ range .posts.GroupByDate "January 2006" }}
+{{ $y := (index .Pages 0).Date.Format "2006" }}
+<section class="archive-month"{{ if ne $y $year }} id="y{{ $y }}"{{ end }}>
+  {{ $year = $y }}
+  <h3>{{ .Key }}</h3>
+  {{ partial (printf "archive/%s.html" $style) .Pages }}
+</section>
+{{ end }}

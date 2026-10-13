@@ -1,0 +1,24 @@
+{{/* Quilt: every post is a patch. Essays are colored blocks (longer essays are bigger), notes are scraps of text, photos are photos. Month labels are stitched in along the way. */}}
+{{ partial "archive/years.html" . }}
+{{ $colors := slice "red" "orange" "yellow" "green" "cyan" "blue" "purple" "magenta" }}
+<ol class="quilt">
+  {{ $month := "" }}{{ $year := "" }}
+  {{ range . }}
+  {{ $m := .Date.Format "Jan 2006" }}
+  {{ if ne $m $month }}
+  {{ $month = $m }}
+  {{ $y := .Date.Format "2006" }}
+  <li class="quilt-month"{{ if ne $y $year }} id="y{{ $y }}"{{ end }}><span>{{ .Date.Format "Jan" }}</span> {{ $y }}</li>
+  {{ $year = $y }}
+  {{ end }}
+  {{ $e := partial "archive/entry.html" . }}
+  {{ $n := len $e.photos }}
+  {{ if eq $e.kind "titled" }}
+  <li class="quilt-titled h-entry{{ if ge .WordCount 600 }} is-long{{ end }}" data-color="{{ index $colors (mod (add .Date.YearDay (len .Title)) 8) }}"><a class="u-url p-name" href="{{ .Permalink }}">{{ .Title }}</a></li>
+  {{ else if eq $e.kind "note" }}
+  <li class="quilt-note h-entry"><a class="u-url" href="{{ .Permalink }}" title="{{ $e.text | truncate 200 }}">{{ $e.text | truncate 80 }}</a></li>
+  {{ else }}
+  <li class="quilt-photo h-entry{{ if gt $n 1 }} is-many{{ end }}"><a class="u-url" href="{{ .Permalink }}" aria-label="{{ if gt $n 1 }}{{ $n }} photos{{ else }}Photo{{ end }} from {{ .Date.Format "Jan 2, 2006" }}"><img src="{{ partial "archive/thumb.html" (dict "src" (index $e.photos 0) "width" 400) }}" alt="" loading="lazy">{{ if gt $n 1 }}<span class="count" aria-hidden="true">{{ $n }}</span>{{ end }}</a></li>
+  {{ end }}
+  {{ end }}
+</ol>

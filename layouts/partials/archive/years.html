@@ -1,0 +1,8 @@
+{{/* Jump links to each year; layouts put id="yYYYY" on the first item of each year. */}}
+<nav class="archive-years" aria-label="Years">
+  <ul>
+    {{ range .GroupByDate "2006" }}
+    <li><a href="#y{{ .Key }}">{{ .Key }}</a></li>
+    {{ end }}
+  </ul>
+</nav>
