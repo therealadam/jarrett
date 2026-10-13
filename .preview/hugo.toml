@@ -8,6 +8,41 @@ disableKinds = ["RSS", "sitemap", "robotsTXT"]
 [taxonomies]
   category = "categories"
 
+# micro.blog renders /archive/ from the home page; the other archive formats mirror ../config.json.
+[outputFormats.ArchiveHTML]
+  mediaType = "text/html"
+  path = "archive"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
+[outputFormats.ArchiveLedger]
+  mediaType = "text/html"
+  path = "archive/ledger"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
+[outputFormats.ArchiveRhythm]
+  mediaType = "text/html"
+  path = "archive/rhythm"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
+[outputFormats.ArchiveLanes]
+  mediaType = "text/html"
+  path = "archive/lanes"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "ArchiveHTML", "ArchiveLedger", "ArchiveRhythm", "ArchiveLanes"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
 [params]
   theme_seconds = "preview"
   itunes_description = "Preview of the Jarrett micro.blog theme."
@@ -29,3 +64,6 @@ disableKinds = ["RSS", "sitemap", "robotsTXT"]
   [[module.mounts]]
     source = "content"
     target = "content"
+  [[module.mounts]]
+    source = "static"
+    target = "static"

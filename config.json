@@ -1,3 +1,111 @@
 {
-	"paginate": 20
+	"paginate": 20,
+	"outputFormats": {
+		"RSS": {
+			"baseName": "feed"
+		},
+		"JSON": {
+			"baseName": "feed"
+		},
+		"RSD": {
+			"mediaType": "application/xml",
+			"baseName": "rsd",
+			"isPlainText": true,
+			"notAlternative": true
+		},
+		"ArchiveHTML": {
+			"mediaType": "text/html",
+			"path": "archive",
+			"baseName": "index",
+			"isHTML": true,
+			"notAlternative": true
+		},
+		"ArchiveJSON": {
+			"mediaType": "application/json",
+			"path": "archive",
+			"baseName": "index",
+			"isPlainText": true,
+			"notAlternative": true
+		},
+		"PhotosHTML": {
+			"mediaType": "text/html",
+			"path": "photos",
+			"baseName": "index",
+			"isHTML": true,
+			"notAlternative": true
+		},
+		"PhotosJSON": {
+			"mediaType": "application/json",
+			"path": "photos",
+			"baseName": "index",
+			"isPlainText": true,
+			"notAlternative": true
+		},
+		"PodcastXML": {
+			"mediaType": "application/rss+xml",
+			"baseName": "podcast",
+			"isPlainText": true,
+			"notAlternative": true
+		},
+		"PodcastJSON": {
+			"mediaType": "application/json",
+			"baseName": "podcast",
+			"isPlainText": true,
+			"notAlternative": true
+		},
+		"ArchiveLedger": {
+			"mediaType": "text/html",
+			"path": "archive/ledger",
+			"baseName": "index",
+			"isHTML": true,
+			"notAlternative": true
+		},
+		"ArchiveRhythm": {
+			"mediaType": "text/html",
+			"path": "archive/rhythm",
+			"baseName": "index",
+			"isHTML": true,
+			"notAlternative": true
+		},
+		"ArchiveLanes": {
+			"mediaType": "text/html",
+			"path": "archive/lanes",
+			"baseName": "index",
+			"isHTML": true,
+			"notAlternative": true
+		}
+	},
+	"outputs": {
+		"home": [
+			"HTML",
+			"RSS",
+			"JSON",
+			"RSD",
+			"ArchiveHTML",
+			"ArchiveJSON",
+			"PhotosHTML",
+			"PhotosJSON",
+			"PodcastXML",
+			"PodcastJSON",
+			"ArchiveLedger",
+			"ArchiveRhythm",
+			"ArchiveLanes"
+		],
+		"page": [
+			"HTML"
+		],
+		"section": [
+			"HTML"
+		],
+		"taxonomy": [
+			"HTML",
+			"RSS",
+			"JSON"
+		],
+		"term": [
+			"HTML",
+			"RSS",
+			"JSON"
+		]
+	}
 }

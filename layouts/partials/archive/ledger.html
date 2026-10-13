@@ -1,0 +1,20 @@
+{{/* Option A: one compact row per post. Titles in bold, notes as a muted excerpt, photos as small thumbnails. */}}
+<ol class="ledger">
+  {{ range . }}
+  {{ $e := partial "archive/entry.html" . }}
+  {{ $n := len $e.photos }}
+  <li class="h-entry is-{{ $e.kind }}">
+    <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">{{ .Date.Format "Jan 2" }}</time>
+    <a class="u-url" href="{{ .Permalink }}">
+      {{ if eq $e.kind "titled" }}
+      <span class="p-name">{{ .Title }}</span>
+      {{ else if eq $e.kind "note" }}
+      <span class="p-summary">{{ $e.text | truncate 110 }}</span>
+      {{ else }}
+      <span class="thumbs">{{ range first 4 $e.photos }}<img src="{{ partial "archive/thumb.html" (dict "src" . "width" 200) }}" alt="" loading="lazy" width="40" height="40">{{ end }}</span>
+      {{ with $e.text }}<span class="p-summary">{{ . | truncate 70 }}</span>{{ else }}<span class="count">{{ if gt $n 1 }}{{ $n }} photos{{ else }}Photo{{ end }}</span>{{ end }}
+      {{ end }}
+    </a>
+  </li>
+  {{ end }}
+</ol>

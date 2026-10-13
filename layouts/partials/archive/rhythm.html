@@ -1,0 +1,32 @@
+{{/* Option B: each kind of post gets its own shape, like a condensed home page. */}}
+{{ range . }}
+{{ $p := . }}
+{{ $e := partial "archive/entry.html" . }}
+{{ $n := len $e.photos }}
+{{ $date := printf `<a class="post-date u-url" href="%s"><time class="dt-published" datetime="%s">%s</time></a>` .Permalink (.Date.Format "2006-01-02T15:04:05-0700") (.Date.Format "Jan 2") | safeHTML }}
+<article class="rhythm h-entry is-{{ $e.kind }}">
+  {{ if eq $e.kind "titled" }}
+  {{ $date }}
+  <h4 class="p-name"><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+  <p class="p-summary">{{ $e.text | truncate 180 }}</p>
+  {{ with $e.photos }}<a class="thumbs" href="{{ $p.Permalink }}" tabindex="-1" aria-hidden="true">{{ range first 3 . }}<img src="{{ partial "archive/thumb.html" (dict "src" . "width" 200) }}" alt="" loading="lazy">{{ end }}</a>{{ end }}
+  {{ else if eq $e.kind "note" }}
+  <p class="p-summary">{{ $e.text | truncate 280 }}</p>
+  {{ $date }}
+  {{ else if eq $e.kind "photo" }}
+  <a class="photo" href="{{ .Permalink }}" tabindex="-1" aria-hidden="true"><img src="{{ partial "archive/thumb.html" (dict "src" (index $e.photos 0) "width" 400) }}" alt="" loading="lazy"></a>
+  <div>
+    {{ $date }}
+    {{ with $e.text }}<p class="p-summary">{{ . | truncate 140 }}</p>{{ end }}
+  </div>
+  {{ else }}
+  {{ $date }}
+  {{ with $e.text }}<p class="p-summary">{{ . | truncate 140 }}</p>{{ end }}
+  <a class="sheet" href="{{ .Permalink }}" aria-label="{{ $n }} photos from {{ .Date.Format "Jan 2, 2006" }}">
+    {{ range $i, $src := first 4 $e.photos }}
+    <span{{ if and (eq $i 3) (gt $n 4) }} class="more" data-more="+{{ sub $n 3 }}"{{ end }}><img src="{{ partial "archive/thumb.html" (dict "src" $src "width" 400) }}" alt="" loading="lazy"></span>
+    {{ end }}
+  </a>
+  {{ end }}
+</article>
+{{ end }}

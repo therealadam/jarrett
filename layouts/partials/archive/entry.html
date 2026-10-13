@@ -1,0 +1,18 @@
+{{- /* Classifies a post for the archive. Returns kind (titled, note, photo, photos), text, and photos. */ -}}
+{{- $photos := slice -}}
+{{- range findRE `<img[^>]+>` .Content -}}
+{{- $photos = $photos | append (replaceRE `(?s)^.*\ssrc="([^"]+)".*$` "$1" .) -}}
+{{- end -}}
+{{- if and (not $photos) .Params.photos -}}
+{{- $photos = .Params.photos -}}
+{{- end -}}
+{{- $text := trim (.Summary | plainify | htmlUnescape) " \n\t" -}}
+{{- $kind := "note" -}}
+{{- if .Title -}}
+{{- $kind = "titled" -}}
+{{- else if gt (len $photos) 1 -}}
+{{- $kind = "photos" -}}
+{{- else if $photos -}}
+{{- $kind = "photo" -}}
+{{- end -}}
+{{- return (dict "kind" $kind "text" $text "photos" $photos) -}}

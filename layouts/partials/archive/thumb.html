@@ -1,0 +1,6 @@
+{{- /* Thumbnail URL for a photo. Uploaded photos go through micro.blog's resizer at the given width. */ -}}
+{{- $src := .src -}}
+{{- if and (hasPrefix $src "http") (not (hasPrefix $src "https://micro.blog/photos/")) -}}
+{{- $src = printf "https://micro.blog/photos/%dx/%s" .width $src -}}
+{{- end -}}
+{{- return $src -}}
