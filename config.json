@@ -1,7 +1,8 @@
 {
 	"paginate": 20,
 	"params": {
-		"archive_style": "classic"
+		"archive_style": "classic",
+		"font_style": "charter"
 	},
 	"outputFormats": {
 		"RSS": {

@@ -12,7 +12,7 @@ A custom [micro.blog](https://micro.blog) theme, synced via GitHub.
 - `layouts/list.archivehtml.html` — `/archive/`, rendered with the layout named in `params.archive_style`
 - `layouts/list.archive<layout>.html` — a preview of every archive layout at `/archive/<layout>/`; their output formats are declared in `config.json`
 - `layouts/partials/archive.html` and `layouts/partials/archive/` — the archive layouts (classic, ledger, rhythm, lanes, almanac, index, quilt, receipt) and shared pieces: post classification (titled, note, photo, photos), thumbnails, year links
-- `layouts/partials/` — shared header, footer, head, post preview, pagination
+- `layouts/partials/` — shared header, footer, head (including the font pairing), post preview, pagination
 - `static/css/main.css` — all styling
 - `theme.toml` / `config.json` — theme metadata and Hugo config. `config.json` repeats theme-blank's `outputFormats`/`outputs` so adding the archive formats can't drop micro.blog's feeds if it replaces those keys instead of merging them
 
@@ -23,6 +23,12 @@ Pick the `/archive/` layout with `archive_style`: `classic` (default), `ledger`,
 - **Theme settings:** `plugin.json` declares the field, so micro.blog shows it under the theme's settings.
 - **Theme config:** change the default in `config.json` → `params.archive_style`.
 - **A plug-in:** any plug-in that sets `params.archive_style` overrides the theme (micro.blog merges defaults, then theme, then plug-in params).
+
+## Fonts
+
+Pick a font pairing with `font_style` (theme settings, or `config.json` → `params.font_style`): `charter` (default, system fonts), `instrument`, `geist`, `garamond`, `baskerville`, `mono`, or `bricolage`. The pairings live in `layouts/partials/fonts.html` (Google Fonts stylesheets) and the `[data-font]` blocks at the top of `static/css/main.css`.
+
+Add `?font=<name>` to any page URL to preview a pairing; it sticks for that browser tab and `?font=` clears it.
 
 ## Buttondown
 

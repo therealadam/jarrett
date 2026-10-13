@@ -81,6 +81,7 @@ disableKinds = ["RSS", "sitemap", "robotsTXT"]
 [params]
   theme_seconds = "preview"
   archive_style = "classic"
+  font_style = "charter"
   itunes_description = "Preview of the Jarrett micro.blog theme."
 
 [author]

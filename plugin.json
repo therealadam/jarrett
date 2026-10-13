@@ -8,6 +8,12 @@
 			"label": "Archive layout: classic, ledger, rhythm, lanes, almanac, index, quilt, receipt (preview each at /archive/<layout>/)",
 			"placeholder": "classic",
 			"type": "string"
+		},
+		{
+			"field": "params.font_style",
+			"label": "Fonts: charter, instrument, geist, garamond, baskerville, mono, bricolage (try any on any page with ?font=<name>)",
+			"placeholder": "charter",
+			"type": "string"
 		}
 	]
 }
