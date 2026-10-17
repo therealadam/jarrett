@@ -1,0 +1,14 @@
+{{/* /photos/: every photo from every post, each linking back to its post. Replaces micro.blog's built-in photos grid, which shows only the first photo of each post. */}}
+{{ define "main" }}
+<div class="gallery h-feed">
+  <h2 class="gallery-title p-name">Photos</h2>
+  <ul class="gallery-grid">
+    {{ range (where site.RegularPages "Type" "post").ByDate.Reverse }}
+    {{ $post := . }}
+    {{ range partial "gallery-photos.html" . }}
+    <li class="h-entry"><a class="u-url" href="{{ $post.Permalink }}"><img src="{{ partial "archive/thumb.html" (dict "src" .src "width" 600) }}" alt="{{ .alt | default (printf "Photo from %s" ($post.Date.Format "Jan 2, 2006")) }}" loading="lazy" decoding="async"></a></li>
+    {{ end }}
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

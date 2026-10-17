@@ -16,6 +16,13 @@ disableKinds = ["RSS", "sitemap", "robotsTXT"]
   isHTML = true
   notAlternative = true
 
+[outputFormats.PhotosHTML]
+  mediaType = "text/html"
+  path = "photos"
+  baseName = "index"
+  isHTML = true
+  notAlternative = true
+
 [outputFormats.ArchiveClassic]
   mediaType = "text/html"
   path = "archive/classic"
@@ -73,7 +80,7 @@ disableKinds = ["RSS", "sitemap", "robotsTXT"]
   notAlternative = true
 
 [outputs]
-  home = ["HTML", "ArchiveHTML", "ArchiveClassic", "ArchiveLedger", "ArchiveRhythm", "ArchiveLanes", "ArchiveAlmanac", "ArchiveIndex", "ArchiveQuilt", "ArchiveReceipt"]
+  home = ["HTML", "ArchiveHTML", "PhotosHTML", "ArchiveClassic", "ArchiveLedger", "ArchiveRhythm", "ArchiveLanes", "ArchiveAlmanac", "ArchiveIndex", "ArchiveQuilt", "ArchiveReceipt"]
 
 [markup.goldmark.renderer]
   unsafe = true

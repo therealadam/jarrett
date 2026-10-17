@@ -1,0 +1,21 @@
+{{- /* Photos for the gallery from one post: a slice of dicts with src and alt. Uses the post's uploaded photos (Params.photos), or the images in its content when there are none. Anything that isn't an image file (PDFs, audio, video) is skipped. */ -}}
+{{- $alts := dict -}}
+{{- $imgs := slice -}}
+{{- range $tag := findRE `<img[^>]+>` .Content -}}
+{{- $src := replaceRE `(?s)^.*\ssrc="([^"]+)".*$` "$1" $tag -}}
+{{- $alt := "" -}}
+{{- with findRE `\salt="[^"]*"` $tag 1 -}}
+{{- $alt = replaceRE `^\salt="(.*)"$` "$1" (index . 0) | htmlUnescape -}}
+{{- end -}}
+{{- $alts = merge $alts (dict $src $alt) -}}
+{{- $imgs = $imgs | append $src -}}
+{{- end -}}
+{{- $sources := $imgs -}}
+{{- with .Params.photos -}}{{- $sources = . -}}{{- end -}}
+{{- $photos := slice -}}
+{{- range $src := $sources -}}
+{{- if findRE `(?i)\.(jpe?g|png|gif|webp|avif|heic|heif|tiff?|bmp)(\?.*)?$` $src -}}
+{{- $photos = $photos | append (dict "src" $src "alt" (index $alts $src)) -}}
+{{- end -}}
+{{- end -}}
+{{- return $photos -}}
