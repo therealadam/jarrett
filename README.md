@@ -31,6 +31,16 @@ Pick a font pairing with `font_style` (theme settings, or `config.json` → `par
 
 Add `?font=<name>` to any page URL to preview a pairing; it sticks for that browser tab and `?font=` clears it.
 
+## Tinker mode
+
+A toolbar for trying the font pairings and archive layouts without touching settings. Open it with `?tinker` on any page or by pressing `t` (ignored while typing or with a modifier held); close it with `t`, `Esc`, the × button, or `?tinker=off`. It stays open for that browser tab.
+
+- **Font** applies a pairing live (same as `?font=`).
+- **Archive** swaps in the chosen layout on `/archive/` without reloading (it fetches `/archive/<layout>/`); elsewhere it jumps to that preview page. The pick sticks for the tab.
+- **Reset** returns to the site's configured font and archive layout.
+
+It's all in `static/js/theme.js` (toolbar built on demand) and the `.tinker` block in `main.css`. The fonts and the archive list reach the script through the `theme-options` JSON in `layouts/partials/head.html`; add a new archive layout to that list too.
+
 ## Buttondown
 
 `buttondown/web.css` is the matching stylesheet for Buttondown newsletter archives. Copy it into **Settings → Archives → Custom CSS** (paid feature), or set the newsletter's `web_css` field via the Buttondown API. It overrides Buttondown's design tokens (`--color-action`, `--font-prose`, etc.) so it adapts to Buttondown's dark mode.
