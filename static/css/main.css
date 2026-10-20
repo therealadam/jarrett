@@ -1559,3 +1559,191 @@ input:focus-visible {
 .gallery-grid a:focus-visible img {
   opacity: 0.85;
 }
+
+/* Bookshelves */
+
+.bookshelf-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 8px 0 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.bookshelf-nav a {
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  text-decoration: none;
+}
+
+.bookshelf-nav a[aria-current] {
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+.bookshelf-nav .count {
+  margin-left: 6px;
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
+.bookshelves.is-live .bookshelf-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.bookshelf-title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  margin: 32px 0 12px;
+}
+
+.bookshelf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 20px 12px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bookshelf-grid .book-cover {
+  display: block;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--border);
+}
+
+.bookshelf-grid img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  margin: 0;
+}
+
+.bookshelf-grid .book-cover:hover img,
+.bookshelf-grid .book-cover:focus-visible img {
+  opacity: 0.85;
+}
+
+.book-cover-blank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 8px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.book-meta {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.book-title,
+.book-author,
+.book-count {
+  display: block;
+}
+
+.book-title {
+  font-weight: 600;
+}
+
+.book-author,
+.book-count {
+  opacity: 0.7;
+}
+
+.book-detail {
+  display: none;
+}
+
+/* An open book moves to the top of the grid and spans it: cover on the left, its posts on the right. */
+.bookshelf-grid .book.is-open {
+  grid-column: 1 / -1;
+  order: -1;
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 4px 20px;
+  align-items: start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.book.is-open .book-cover {
+  grid-row: 1 / 3;
+}
+
+.book.is-open .book-meta {
+  grid-column: 2;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.book.is-open .book-count {
+  display: none;
+}
+
+.book.is-open .book-detail {
+  display: block;
+  grid-column: 2;
+}
+
+.book-posts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.book-posts li {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 12px;
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+}
+
+.book-posts time {
+  opacity: 0.6;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.book-no-posts,
+.book-back {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+}
+
+.book-close {
+  all: unset;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.book-close:hover,
+.book-close:focus-visible {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .bookshelf-grid .book.is-open {
+    grid-template-columns: 90px 1fr;
+  }
+
+  .book-posts li {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

@@ -1,0 +1,65 @@
+{{- /* {{< bookshelf >}}: all your bookshelves as a cover quilt with a nav to switch between them. {{< bookshelf shelf="finishedreading" >}} shows just one. Clicking a book (static/js/bookshelf.js) pulls it out onto its own line above the grid with a list of the posts that link to it; without JS every shelf is shown and covers link straight to the post. Posts are matched by the ISBNs micro.blog records in a post's `books` front matter. The `variant` param is ignored so pages written for the bookshelf plug-in keep working. Shelf names come from site.Params.bookshelf_labels (shelf key -> name), else the keys below, else the raw key. */ -}}
+{{- $shelves := site.Data.bookshelves -}}
+{{- $names := dict "currentlyreading" "Currently reading" "wanttoread" "Want to read" "finishedreading" "Finished" "finishedenjoyedrecommended" "Finished, enjoyed, recommended" "startedreadingpausedfornow" "Started reading, paused for now" -}}
+{{- $names = merge $names (site.Params.bookshelf_labels | default dict) -}}
+{{- $keys := slice -}}
+{{- with .Get "shelf" -}}
+{{- $keys = slice (lower (replace . " " "")) -}}
+{{- else -}}
+{{- range $k := slice "currentlyreading" "wanttoread" "finishedreading" "finishedenjoyedrecommended" "startedreadingpausedfornow" -}}{{- if isset $shelves $k -}}{{- $keys = $keys | append $k -}}{{- end -}}{{- end -}}
+{{- range $k, $_ := $shelves -}}{{- if not (in $keys $k) -}}{{- $keys = $keys | append $k -}}{{- end -}}{{- end -}}
+{{- end -}}
+{{- $posts := newScratch -}}
+{{- range (where site.RegularPages "Type" "post").ByDate.Reverse -}}
+{{- $post := . -}}
+{{- range .Params.books -}}
+{{- $posts.Add (printf "%v" .) (slice $post) -}}
+{{- end -}}
+{{- end -}}
+<div class="bookshelves" data-bookshelves>
+{{- if gt (len $keys) 1 }}
+  <nav class="bookshelf-nav" aria-label="Bookshelves">
+    {{- range $keys }}
+    <a href="#shelf-{{ . }}" data-shelf="{{ . }}">{{ index $names . | default . }}<span class="count">{{ len (index $shelves .) }}</span></a>
+    {{- end }}
+  </nav>
+{{- end }}
+{{- range $keys -}}
+{{- $key := . -}}
+{{- $books := index $shelves $key -}}
+{{- if $books }}
+  <section class="bookshelf" id="shelf-{{ $key }}" data-shelf="{{ $key }}">
+    <h3 class="bookshelf-title">{{ index $names $key | default $key }}</h3>
+    <ul class="bookshelf-grid">
+      {{- range $books }}
+      {{- $mine := $posts.Get (printf "%v" .isbn) | default slice }}
+      {{- $href := printf "/books/%v/" .isbn }}
+      {{- with $mine }}{{ $href = (index . 0).RelPermalink }}{{ end }}
+      <li class="book" data-isbn="{{ .isbn }}">
+        <a class="book-cover" href="{{ $href }}" title="{{ .title }} by {{ .author }}">
+          {{- if .cover_url }}<img src="{{ partial "archive/thumb.html" (dict "src" .cover_url "width" 300) }}" alt="Cover of {{ .title }}" loading="lazy" decoding="async">
+          {{- else }}<span class="book-cover-blank">{{ .title }}</span>{{ end -}}
+        </a>
+        <p class="book-meta"><span class="book-title">{{ .title }}</span> <span class="book-author">{{ .author }}</span>
+        {{- if $mine }} <span class="book-count">{{ len $mine }} {{ cond (eq (len $mine) 1) "post" "posts" }}</span>{{ end -}}
+        </p>
+        <div class="book-detail">
+          {{- if $mine }}
+          <ol class="book-posts">
+            {{- range $mine }}
+            <li><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time> <a href="{{ .RelPermalink }}">{{ with .Title }}{{ . }}{{ else }}{{ .Summary | plainify | htmlUnescape | truncate 140 }}{{ end }}</a></li>
+            {{- end }}
+          </ol>
+          {{- else }}
+          <p class="book-no-posts">No posts about this one yet.</p>
+          {{- end }}
+          <p class="book-back"><a href="/books/{{ .isbn }}/">Book page</a> · <button type="button" class="book-close">Back to shelf</button></p>
+        </div>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+{{- end }}
+{{- end }}
+</div>
+<script src="{{ "js/bookshelf.js" | relURL }}?{{ site.Params.theme_seconds }}" defer></script>
