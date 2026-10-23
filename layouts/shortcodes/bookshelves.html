@@ -1,4 +1,4 @@
-{{- /* {{< bookshelves >}}: all your bookshelves as a cover quilt with a nav to switch between them. {{< bookshelves shelf="finishedreading" >}} shows just one. Clicking a book (static/js/bookshelf.js) pulls it out onto its own line above the grid with a list of the posts that link to it; without JS every shelf is shown and covers link straight to the post. Posts are matched by the ISBNs micro.blog records in a post's `books` front matter. Named bookshelves, not bookshelf, because the micro.blog "Bookshelf shortcode" plug-in ships a bookshelf shortcode that overrides a theme shortcode of the same name. Shelf names come from site.Params.bookshelf_labels (shelf key -> name), else the keys below, else the raw key. */ -}}
+{{- /* {{< bookshelves >}}: all your bookshelves as a cover quilt with a nav to switch between them. {{< bookshelves shelf="finishedreading" >}} shows just one. Clicking a book (static/js/bookshelf.js) pulls it out onto its own line above the grid with a list of the posts that link to it; without JS every shelf is shown and covers link straight to the post. Posts are matched by the ISBNs micro.blog records in a post's `books` front matter. Named bookshelves, not bookshelf, because the micro.blog "Bookshelf shortcode" plug-in ships a bookshelf shortcode that overrides a theme shortcode of the same name. Shelf names come from site.Params.bookshelf_labels (shelf key -> name), else the keys below, else the key capitalized (finished -> Finished). */ -}}
 {{- $shelves := site.Data.bookshelves -}}
 {{- $names := dict "currentlyreading" "Currently reading" "wanttoread" "Want to read" "finishedreading" "Finished" "finishedenjoyedrecommended" "Finished, enjoyed, recommended" "startedreadingpausedfornow" "Started reading, paused for now" -}}
 {{- $names = merge $names (site.Params.bookshelf_labels | default dict) -}}
@@ -20,7 +20,7 @@
 {{- if gt (len $keys) 1 }}
   <nav class="bookshelf-nav" aria-label="Bookshelves">
     {{- range $keys }}
-    <a href="#shelf-{{ . }}" data-shelf="{{ . }}">{{ index $names . | default . }}<span class="count">{{ len (index $shelves .) }}</span></a>
+    <a href="#shelf-{{ . }}" data-shelf="{{ . }}">{{ index $names . | default (title .) }}<span class="count">{{ len (index $shelves .) }}</span></a>
     {{- end }}
   </nav>
 {{- end }}
@@ -29,7 +29,7 @@
 {{- $books := index $shelves $key -}}
 {{- if $books }}
   <section class="bookshelf" id="shelf-{{ $key }}" data-shelf="{{ $key }}">
-    <h3 class="bookshelf-title">{{ index $names $key | default $key }}</h3>
+    <h3 class="bookshelf-title">{{ index $names $key | default (title $key) }}</h3>
     <ul class="bookshelf-grid">
       {{- range $books }}
       {{- $mine := $posts.Get (printf "%v" .isbn) | default slice }}
