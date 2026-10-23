@@ -526,7 +526,7 @@ input:focus-visible {
   }
 }
 
-/* Page layouts (params.layout_style; see layouts/partials/site-layout.html). centered is the default above.
+/* Page layouts (params.layout_style; see layouts/partials/site-layout.html). The header styles above are centered; sidebar is the default layout.
    All share the same header/main/footer markup; the palette's "Go to" button and dialog come from theme.js. */
 
 .nav-palette-button {

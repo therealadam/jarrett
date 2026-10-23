@@ -17,8 +17,8 @@
 		},
 		{
 			"field": "params.layout_style",
-			"label": "Page layout (header, navigation, footer): centered, masthead, nameplate, minimal, sidebar, spine, palette (try any with tinker mode: ?tinker or press t)",
-			"placeholder": "centered",
+			"label": "Page layout (header, navigation, footer): sidebar, centered, masthead, nameplate, minimal, spine, palette (try any with tinker mode: ?tinker or press t)",
+			"placeholder": "sidebar",
 			"type": "string"
 		}
 	]
