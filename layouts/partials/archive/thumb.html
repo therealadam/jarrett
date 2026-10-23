@@ -1,6 +1,6 @@
-{{- /* Thumbnail URL for a photo. Uploaded photos go through micro.blog's resizer at the given width. */ -}}
+{{- /* Thumbnail URL for a photo. Uploaded photos go through micro.blog's resizer at the given width. URLs that are already resized (bookshelf covers come as cdn.micro.blog/photos/...) are left alone: resizing them twice often returns a blank image. */ -}}
 {{- $src := .src -}}
-{{- if and (hasPrefix $src "http") (not (hasPrefix $src "https://micro.blog/photos/")) -}}
+{{- if and (hasPrefix $src "http") (not (hasPrefix $src "https://micro.blog/photos/")) (not (hasPrefix $src "https://cdn.micro.blog/photos/")) -}}
 {{- $src = printf "https://micro.blog/photos/%dx/%s" .width $src -}}
 {{- end -}}
 {{- return $src -}}
