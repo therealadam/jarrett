@@ -19,12 +19,13 @@
 
   apply(stored());
 
-  var options = { fonts: {}, archives: [], archive: "classic", archivePath: "/archive/" };
+  var options = { fonts: {}, archives: [], archive: "classic", archivePath: "/archive/", layouts: [] };
   try {
     options = JSON.parse(document.getElementById("theme-options").textContent);
   } catch (e) {}
   var fonts = options.fonts;
   var siteFont = root.getAttribute("data-font");
+  var siteLayout = root.getAttribute("data-layout");
 
   function get(key) {
     try {
@@ -60,11 +61,16 @@
 
   // Previews stick for the browser tab (sessionStorage).
   // ?font=<name> tries a pairing from the theme's font list; ?font= clears it.
+  // ?layout=<name> does the same for page layouts.
   // ?tinker opens the tinker toolbar (press t to toggle it); ?tinker=off closes it.
   var query = new URLSearchParams(location.search);
   var fontParam = query.get("font");
   if (fontParam !== null) {
     set("font", fonts.hasOwnProperty(fontParam) && fontParam !== siteFont ? fontParam : null);
+  }
+  var layoutParam = query.get("layout");
+  if (layoutParam !== null) {
+    set("layout", options.layouts.indexOf(layoutParam) !== -1 && layoutParam !== siteLayout ? layoutParam : null);
   }
   var tinkerParam = query.get("tinker");
   if (tinkerParam !== null) {
@@ -76,6 +82,13 @@
     applyFont(previewFont);
   } else {
     previewFont = null;
+  }
+
+  var previewLayout = get("layout");
+  if (previewLayout && options.layouts.indexOf(previewLayout) !== -1) {
+    root.setAttribute("data-layout", previewLayout);
+  } else {
+    previewLayout = null;
   }
 
   // Archive layouts are rendered by the server, so trying one means fetching its preview page
@@ -136,12 +149,15 @@
     function renderBadge() {
       if (badge) badge.remove();
       badge = null;
-      if (!previewFont || toolbar) return;
+      if (!(previewFont || previewLayout) || toolbar) return;
+      var parts = [];
+      if (previewFont) parts.push("font: " + previewFont);
+      if (previewLayout) parts.push("layout: " + previewLayout);
       badge = document.createElement("a");
       badge.className = "font-preview-badge";
-      badge.href = "?font=";
-      badge.textContent = "Font preview: " + previewFont + " ×";
-      badge.setAttribute("aria-label", "Font preview: " + previewFont + ". Clear preview");
+      badge.href = "?font=&layout=";
+      badge.textContent = "Preview " + parts.join(", ") + " ×";
+      badge.setAttribute("aria-label", "Preview " + parts.join(", ") + ". Clear preview");
       document.body.appendChild(badge);
     }
 
@@ -179,6 +195,12 @@
         applyFont(name);
       });
 
+      var layout = field("Layout", options.layouts, root.getAttribute("data-layout"), function (name) {
+        previewLayout = name === siteLayout ? null : name;
+        set("layout", previewLayout);
+        root.setAttribute("data-layout", name);
+      });
+
       var archive = field("Archive", options.archives, get("archive") || currentArchive(), function (style) {
         set("archive", style === options.archive ? null : style);
         showArchive(style);
@@ -189,10 +211,14 @@
       reset.textContent = "Reset";
       reset.addEventListener("click", function () {
         previewFont = null;
+        previewLayout = null;
         set("font", null);
+        set("layout", null);
         set("archive", null);
         applyFont(siteFont);
+        root.setAttribute("data-layout", siteLayout);
         font.select.value = siteFont;
+        layout.select.value = siteLayout;
         archive.select.value = options.archive;
         if (archiveEl() && currentArchive() !== options.archive) showArchive(options.archive);
       });
@@ -204,7 +230,7 @@
       close.title = "Close (t)";
       close.addEventListener("click", closeTinker);
 
-      toolbar.append(title, font.wrap, archive.wrap, reset, close);
+      toolbar.append(title, font.wrap, layout.wrap, archive.wrap, reset, close);
       document.body.appendChild(toolbar);
       renderBadge();
     }
@@ -215,6 +241,67 @@
       toolbar.remove();
       toolbar = null;
       renderBadge();
+    }
+
+    // The palette layout swaps the header nav for a "Go to" button that opens a filterable list
+    // of the nav links (also opened with /). The button exists in every layout; CSS shows it only
+    // in palette, and hides the nav only when the button is there, so the nav survives without JS.
+    var palette = null;
+    var nav = document.querySelector(".site-nav");
+    var headerInner = document.querySelector(".site-header .wrapper");
+    if (nav && headerInner) {
+      var goButton = document.createElement("button");
+      goButton.type = "button";
+      goButton.className = "nav-palette-button";
+      goButton.innerHTML = 'Go to… <kbd aria-hidden="true">/</kbd>';
+      headerInner.appendChild(goButton);
+
+      palette = document.createElement("dialog");
+      palette.className = "nav-palette";
+      palette.setAttribute("aria-label", "Go to");
+      var filter = document.createElement("input");
+      filter.type = "search";
+      filter.placeholder = "Go to…";
+      filter.setAttribute("aria-label", "Filter pages");
+      var list = document.createElement("ul");
+      var home = document.querySelector(".site-title a");
+      [home].concat(Array.prototype.slice.call(nav.querySelectorAll("a"))).forEach(function (link) {
+        if (!link) return;
+        var item = document.createElement("li");
+        var copy = document.createElement("a");
+        copy.href = link.getAttribute("href");
+        copy.textContent = link === home ? "Home" : link.textContent;
+        item.appendChild(copy);
+        list.appendChild(item);
+      });
+      palette.append(filter, list);
+      document.body.appendChild(palette);
+
+      filter.addEventListener("input", function () {
+        var q = filter.value.trim().toLowerCase();
+        list.querySelectorAll("li").forEach(function (item) {
+          item.hidden = q !== "" && item.textContent.toLowerCase().indexOf(q) === -1;
+        });
+      });
+      filter.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter") return;
+        var first = list.querySelector("li:not([hidden]) a");
+        if (first) location.href = first.href;
+      });
+      // Clicking the backdrop closes it.
+      palette.addEventListener("click", function (event) {
+        if (event.target === palette) palette.close();
+      });
+      goButton.addEventListener("click", openPalette);
+    }
+
+    function openPalette() {
+      if (!palette || palette.open) return;
+      palette.querySelector("input").value = "";
+      palette.querySelectorAll("li").forEach(function (item) {
+        item.hidden = false;
+      });
+      palette.showModal();
     }
 
     if (tinkering()) openTinker();
@@ -237,7 +324,10 @@
       if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
       var target = event.target;
       if (target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
-      if (event.key === "t" || event.key === "T") {
+      if (event.key === "/" && root.getAttribute("data-layout") === "palette" && palette) {
+        event.preventDefault();
+        openPalette();
+      } else if (event.key === "t" || event.key === "T") {
         toolbar ? closeTinker() : openTinker();
       } else if (event.key === "Escape") {
         closeTinker();

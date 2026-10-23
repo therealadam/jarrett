@@ -33,7 +33,8 @@
   {{ $archives := slice "classic" "ledger" "rhythm" "lanes" "almanac" "index" "quilt" "receipt" }}
   {{ $archive := lower (trim (string (site.Params.archive_style | default "classic")) " ") }}
   {{ if not (in $archives $archive) }}{{ $archive = "classic" }}{{ end }}
-  <script type="application/json" id="theme-options">{{ dict "fonts" $fonts.options "archives" $archives "archive" $archive "archivePath" ("archive/" | relURL) | jsonify | safeJS }}</script>
+  {{ $layouts := partial "site-layout.html" . }}
+  <script type="application/json" id="theme-options">{{ dict "fonts" $fonts.options "archives" $archives "archive" $archive "archivePath" ("archive/" | relURL) "layouts" $layouts.options | jsonify | safeJS }}</script>
   <link rel="stylesheet" href="{{ "css/main.css" | relURL }}?{{ .Site.Params.theme_seconds }}">
   <script src="{{ "js/theme.js" | relURL }}?{{ .Site.Params.theme_seconds }}"></script>
   {{ partial "microblog_head.html" . }}

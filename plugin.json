@@ -11,8 +11,14 @@
 		},
 		{
 			"field": "params.font_style",
-			"label": "Fonts: charter, instrument, geist, garamond, baskerville, mono, bricolage (try any on any page with ?font=<name>)",
-			"placeholder": "charter",
+			"label": "Fonts: instrument, charter, geist, garamond, baskerville, mono, bricolage (try any on any page with ?font=<name>)",
+			"placeholder": "instrument",
+			"type": "string"
+		},
+		{
+			"field": "params.layout_style",
+			"label": "Page layout (header, navigation, footer): centered, masthead, nameplate, minimal, sidebar, spine, palette (try any with tinker mode: ?tinker or press t)",
+			"placeholder": "centered",
 			"type": "string"
 		}
 	]

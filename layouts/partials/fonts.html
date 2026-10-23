@@ -9,6 +9,6 @@
   "mono" (print $g "family=Space+Grotesk:wght@400..700&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap")
   "bricolage" (print $g "family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap")
 -}}
-{{- $current := lower (trim (string (site.Params.font_style | default "charter")) " ") -}}
-{{- if not (isset $options $current) -}}{{- $current = "charter" -}}{{- end -}}
+{{- $current := lower (trim (string (site.Params.font_style | default "instrument")) " ") -}}
+{{- if not (isset $options $current) -}}{{- $current = "instrument" -}}{{- end -}}
 {{- return (dict "options" $options "current" $current) -}}

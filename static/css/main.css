@@ -31,7 +31,7 @@
   }
 }
 
-/* Font pairings (params.font_style; see layouts/partials/fonts.html). charter is the default above. */
+/* Font pairings (params.font_style; see layouts/partials/fonts.html). The variables above are charter (system fonts); instrument is the default pairing. */
 
 :root[data-font="instrument"] {
   --font-display: "Instrument Serif", Georgia, serif;
@@ -524,6 +524,477 @@ input:focus-visible {
   .theme-switcher button {
     transition: none;
   }
+}
+
+/* Page layouts (params.layout_style; see layouts/partials/site-layout.html). centered is the default above.
+   All share the same header/main/footer markup; the palette's "Go to" button and dialog come from theme.js. */
+
+.nav-palette-button {
+  display: none;
+}
+
+/* masthead: avatar and title on the left, nav on the right, one row */
+
+:root[data-layout="masthead"] .site-header {
+  padding: 40px 0 20px;
+  text-align: left;
+}
+
+:root[data-layout="masthead"] .site-header .wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+:root[data-layout="masthead"] .profile-photo {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+:root[data-layout="masthead"] .site-title {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+:root[data-layout="masthead"] .site-nav {
+  margin-left: auto;
+}
+
+:root[data-layout="masthead"] .site-footer {
+  text-align: left;
+}
+
+/* nameplate: a newspaper flag — big title, nav between rules */
+
+:root[data-layout="nameplate"] .site-header {
+  padding: 48px 0 0;
+  border-bottom: none;
+}
+
+:root[data-layout="nameplate"] .avatar-link {
+  display: none;
+}
+
+:root[data-layout="nameplate"] .site-title {
+  margin: 0 0 20px;
+  font-size: clamp(2.75rem, 9vw, 4.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+:root[data-layout="nameplate"] .site-nav {
+  border-top: 1px solid var(--text);
+  border-bottom: 4px double var(--text);
+  padding: 4px 0;
+}
+
+:root[data-layout="nameplate"] .site-nav ul {
+  gap: 4px 28px;
+}
+
+:root[data-layout="nameplate"] .site-nav a {
+  color: var(--text);
+}
+
+:root[data-layout="nameplate"] .site-footer {
+  border-top: 4px double var(--text);
+}
+
+/* minimal: the title and nav as one plain line of text */
+
+:root[data-layout="minimal"] .site-header {
+  padding: 36px 0 0;
+  margin-bottom: 56px;
+  text-align: left;
+  border-bottom: none;
+}
+
+:root[data-layout="minimal"] .site-header .wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+:root[data-layout="minimal"] .avatar-link {
+  display: none;
+}
+
+:root[data-layout="minimal"] .site-title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+:root[data-layout="minimal"] .site-nav ul {
+  justify-content: flex-start;
+  gap: 0;
+}
+
+:root[data-layout="minimal"] .site-nav li::before {
+  content: "/";
+  margin: 0 0.5em;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+:root[data-layout="minimal"] .site-nav a {
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:root[data-layout="minimal"] .site-footer {
+  border-top: none;
+  text-align: left;
+}
+
+/* sidebar: a sticky left column with the title and a stacked nav (à la Daring Fireball).
+   Narrow screens get the centered header. */
+
+@media (min-width: 960px) {
+  :root[data-layout="sidebar"] body {
+    display: grid;
+    grid-template-columns: 200px minmax(0, var(--max-width));
+    grid-template-rows: auto 1fr;
+    justify-content: center;
+    column-gap: 56px;
+  }
+
+  :root[data-layout="sidebar"] .site-header {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: start;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 56px 28px 24px 0;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    text-align: right;
+  }
+
+  :root[data-layout="sidebar"] .site-header .wrapper {
+    max-width: none;
+    margin: 0;
+  }
+
+  :root[data-layout="sidebar"] .profile-photo {
+    width: 56px;
+    height: 56px;
+  }
+
+  :root[data-layout="sidebar"] .site-title {
+    margin: 8px 0 28px;
+    font-size: 1.9rem;
+    line-height: 1.05;
+  }
+
+  :root[data-layout="sidebar"] .site-nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  :root[data-layout="sidebar"] .site-nav li {
+    border-top: 1px solid var(--border);
+  }
+
+  :root[data-layout="sidebar"] .site-nav a {
+    display: block;
+    padding: 9px 0;
+  }
+
+  :root[data-layout="sidebar"] .theme-switcher {
+    position: static;
+    order: 1;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  :root[data-layout="sidebar"] .page-content {
+    grid-column: 2;
+    padding-top: 56px;
+  }
+
+  :root[data-layout="sidebar"] :is(.page-content, .site-footer) .wrapper {
+    max-width: none;
+  }
+
+  :root[data-layout="sidebar"] .site-footer {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
+/* spine: the header is a book spine down the left edge, read top to bottom.
+   Narrow screens turn it into a band across the top. */
+
+:root[data-layout="spine"] .site-header {
+  margin: 0 -20px 40px;
+  padding: 18px 20px;
+  border-bottom: none;
+  background: var(--text);
+  text-align: left;
+}
+
+:root[data-layout="spine"] .site-header .wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+:root[data-layout="spine"] .profile-photo {
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+
+:root[data-layout="spine"] .site-title {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+:root[data-layout="spine"] .site-title a {
+  color: var(--bg);
+}
+
+:root[data-layout="spine"] .site-nav a {
+  padding: 0;
+  color: var(--bg);
+  opacity: 0.7;
+}
+
+:root[data-layout="spine"] .site-nav a:hover {
+  opacity: 1;
+}
+
+:root[data-layout="spine"] .theme-switcher {
+  position: static;
+  order: 1;
+  margin-top: 8px;
+}
+
+:root[data-layout="spine"] .theme-switcher button:not([aria-pressed="true"]) {
+  color: var(--bg);
+}
+
+@media (max-width: 719px) {
+  :root[data-layout="spine"] .site-header {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 720px) {
+  :root[data-layout="spine"] body {
+    padding-left: 92px;
+  }
+
+  :root[data-layout="spine"] .page-content {
+    padding-top: 56px;
+  }
+
+  :root[data-layout="spine"] .site-header {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 64px;
+    margin: 0;
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  :root[data-layout="spine"] .site-header .wrapper {
+    flex: 1;
+    min-height: 0;
+    flex-wrap: nowrap;
+    max-width: none;
+    margin: 0;
+    writing-mode: vertical-rl;
+    gap: 24px;
+  }
+
+  :root[data-layout="spine"] .site-title {
+    font-size: 1.75rem;
+    white-space: nowrap;
+  }
+
+  :root[data-layout="spine"] .site-nav {
+    margin-top: auto;
+  }
+
+  :root[data-layout="spine"] .site-nav ul {
+    flex-wrap: nowrap;
+    gap: 22px;
+  }
+
+  :root[data-layout="spine"] .theme-switcher {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  :root[data-layout="spine"] .theme-switcher .label {
+    display: none;
+  }
+
+  :root[data-layout="spine"] body::before {
+    left: 64px;
+  }
+}
+
+/* palette: the nav hides behind a "Go to" button (or /) that opens a full-screen index of pages */
+
+:root[data-layout="palette"] .site-header {
+  padding: 40px 0 20px;
+  text-align: left;
+}
+
+:root[data-layout="palette"] .site-header .wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+:root[data-layout="palette"] .profile-photo {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+:root[data-layout="palette"] .site-title {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+:root[data-layout="palette"] .site-header:has(.nav-palette-button) .site-nav {
+  display: none;
+}
+
+:root[data-layout="palette"] .nav-palette-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  padding: 6px 8px 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+:root[data-layout="palette"] .nav-palette-button:hover {
+  color: var(--accent-hover);
+  border-color: currentColor;
+}
+
+.nav-palette-button kbd {
+  min-width: 22px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--selection);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.75rem;
+}
+
+.nav-palette {
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  max-height: none;
+  margin: 0;
+  padding: 12vh max(24px, calc(50vw - 340px)) 40px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  overflow-y: auto;
+}
+
+.nav-palette::backdrop {
+  background: var(--bg);
+  opacity: 0.94;
+  backdrop-filter: blur(6px);
+}
+
+.nav-palette input {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: none;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  outline: none;
+}
+
+.nav-palette input:focus {
+  border-bottom-color: var(--accent);
+}
+
+.nav-palette ul {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  counter-reset: page;
+}
+
+.nav-palette li {
+  counter-increment: page;
+}
+
+.nav-palette a {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 2px 0;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.nav-palette a::before {
+  content: counter(page, decimal-leading-zero);
+  min-width: 2ch;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+.nav-palette a:is(:hover, :focus-visible) {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.nav-palette li:not([hidden]) ~ li:not([hidden]) a {
+  border-top: 1px solid var(--border);
 }
 
 /* Newsletter subscribe form */
@@ -1459,6 +1930,7 @@ input:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 8px 16px;
+  width: max-content;
   max-width: calc(100vw - 24px);
   padding: 8px 8px 8px 16px;
   border: 1px solid var(--border);

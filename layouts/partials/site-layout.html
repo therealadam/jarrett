@@ -1,0 +1,5 @@
+{{- /* Page layouts (header, navigation, footer): returns the names and the one chosen in params.layout_style. Each is a [data-layout] block in static/css/main.css. */ -}}
+{{- $options := slice "centered" "masthead" "nameplate" "minimal" "sidebar" "spine" "palette" -}}
+{{- $current := lower (trim (string (site.Params.layout_style | default "centered")) " ") -}}
+{{- if not (in $options $current) -}}{{- $current = "centered" -}}{{- end -}}
+{{- return (dict "options" $options "current" $current) -}}
