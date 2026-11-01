@@ -94,6 +94,7 @@ disableKinds = ["RSS", "sitemap", "robotsTXT"]
 
 [author]
   name = "Adam"
+  avatar = "/preview-avatar.svg"
 
 # Use the repo's layouts and static files as the theme.
 [module]
