@@ -90,6 +90,7 @@
   --font-display: "Paper Mono", ui-monospace, monospace;
   --font-serif: "Paper Mono", ui-monospace, monospace;
   --font-sans: "Paper Mono", ui-monospace, monospace;
+  --font-code: "Paper Mono", ui-monospace, monospace;
   --display-weight: 700;
   --body-size: 1rem;
 }
@@ -104,6 +105,14 @@
   --selection: #3a3150;
   --border: #2f2a3d;
   --rainbow: linear-gradient(90deg, #d14d41, #da702c, #d0a215, #879a39, #3aa99f, #4385be, #8b7ec8, #ce5d97);
+}
+
+:not(pre) > code {
+  font-family: var(--font-code, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  font-size: 0.85em;
+  padding: 0.1em 0.3em;
+  border-radius: 0.25em;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
 }
 
 * {
