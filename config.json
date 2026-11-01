@@ -3,7 +3,7 @@
 	"params": {
 		"archive_style": "classic",
 		"font_style": "instrument",
-		"layout_style": "sidebar"
+		"layout_style": "masthead"
 	},
 	"outputFormats": {
 		"RSS": {

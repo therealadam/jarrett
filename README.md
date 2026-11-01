@@ -34,13 +34,13 @@ Add `?font=<name>` to any page URL to preview a pairing; it sticks for that brow
 
 ## Page layout
 
-Pick how the header, navigation, and footer are arranged with `layout_style` (theme settings, or `config.json` → `params.layout_style`). Unknown values fall back to `sidebar`.
+Pick how the header, navigation, and footer are arranged with `layout_style` (theme settings, or `config.json` → `params.layout_style`). Unknown values fall back to `masthead`.
 
 - `centered` — avatar, title, and nav stacked in the middle
-- `masthead` — avatar and title on the left, nav on the right, one row
+- `masthead` (default) — avatar and title on the left, nav on the right, one row
 - `nameplate` — a newspaper flag: big title, nav between a rule and a double rule
 - `minimal` — title and nav as one plain line of text (`Title / About / Archive`)
-- `sidebar` (default) — a sticky left column with the title and a stacked nav, à la Daring Fireball (centered on narrow screens)
+- `sidebar` — a sticky left column with the title and a stacked nav, à la Daring Fireball (centered on narrow screens)
 - `spine` — the header is a dark book spine down the left edge, title and nav set vertically (a band across the top on narrow screens)
 - `palette` — the nav hides behind a "Go to…" button (or `/`) that opens a full-screen, filterable index of pages in big display type
 
