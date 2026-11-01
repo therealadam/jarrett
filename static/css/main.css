@@ -95,6 +95,127 @@
   --body-size: 1rem;
 }
 
+/* Classics */
+
+:root[data-font="playfair"] {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-sans: "Source Sans 3", var(--font-system-sans);
+  --display-weight: 700;
+  --body-size: 1.2rem;
+}
+
+:root[data-font="merriweather"] {
+  --font-display: "Merriweather", Georgia, serif;
+  --font-serif: "Merriweather", Georgia, serif;
+  --font-sans: "Merriweather Sans", var(--font-system-sans);
+  --display-weight: 700;
+  --body-size: 1.05rem;
+}
+
+:root[data-font="crimson"] {
+  --font-display: "Crimson Pro", Georgia, serif;
+  --font-serif: "Crimson Pro", Georgia, serif;
+  --font-sans: "Work Sans", var(--font-system-sans);
+  --display-weight: 600;
+  --body-size: 1.4rem;
+}
+
+/* Trendy */
+
+:root[data-font="fraunces"] {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", var(--font-system-sans);
+  --display-weight: 700;
+  --body-size: 1.1rem;
+}
+
+:root[data-font="dmserif"] {
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-serif: "DM Serif Text", Georgia, serif;
+  --font-sans: "DM Sans", var(--font-system-sans);
+  --display-weight: 400;
+  --body-size: 1.15rem;
+  font-synthesis: none;
+}
+
+:root[data-font="jakarta"] {
+  --font-display: "Plus Jakarta Sans", var(--font-system-sans);
+  --font-serif: "Plus Jakarta Sans", var(--font-system-sans);
+  --font-sans: "Plus Jakarta Sans", var(--font-system-sans);
+  --display-weight: 700;
+  --body-size: 1.05rem;
+}
+
+/* Weird */
+
+:root[data-font="typewriter"] {
+  --font-display: "Special Elite", "Courier New", monospace;
+  --font-serif: "Courier Prime", "Courier New", monospace;
+  --font-sans: "Special Elite", "Courier New", monospace;
+  --display-weight: 400;
+  --body-size: 1.1rem;
+  font-synthesis: none;
+}
+
+:root[data-font="syne"] {
+  --font-display: "Syne", var(--font-system-sans);
+  --font-serif: "Spectral", Georgia, serif;
+  --font-sans: "Syne", var(--font-system-sans);
+  --display-weight: 700;
+  --body-size: 1.2rem;
+}
+
+:root[data-font="blackletter"] {
+  --font-display: "UnifrakturCook", "Old English Text MT", serif;
+  --font-serif: "EB Garamond", Garamond, Georgia, serif;
+  --font-sans: "Libre Franklin", var(--font-system-sans);
+  --display-weight: 700;
+  --body-size: 1.35rem;
+  font-synthesis: none;
+}
+
+/* Automotive */
+
+/* Highway Gothic-style signage and license plates */
+:root[data-font="highway"] {
+  --font-display: "Barlow Semi Condensed", var(--font-system-sans);
+  --font-serif: "Barlow", var(--font-system-sans);
+  --font-sans: "Barlow Semi Condensed", var(--font-system-sans);
+  --display-weight: 700;
+  --body-size: 1.2rem;
+}
+
+/* Futura-like geometric type, long a favorite of car ads */
+:root[data-font="futura"] {
+  --font-display: "Jost", "Futura", var(--font-system-sans);
+  --font-serif: "Jost", "Futura", var(--font-system-sans);
+  --font-sans: "Jost", "Futura", var(--font-system-sans);
+  --display-weight: 600;
+  --body-size: 1.15rem;
+}
+
+/* Eurostile-style wide headlines over instrument-cluster text */
+:root[data-font="dashboard"] {
+  --font-display: "Michroma", var(--font-system-sans);
+  --font-serif: "Saira", var(--font-system-sans);
+  --font-sans: "Saira", var(--font-system-sans);
+  --display-weight: 400;
+  --body-size: 1.1rem;
+  font-synthesis: none;
+}
+
+/* Fifties chrome-script badging */
+:root[data-font="chrome"] {
+  --font-display: "Yellowtail", cursive;
+  --font-serif: "Barlow", var(--font-system-sans);
+  --font-sans: "Barlow", var(--font-system-sans);
+  --display-weight: 400;
+  --body-size: 1.15rem;
+  font-synthesis: none;
+}
+
 :root[data-theme="dark"] {
   --text: #cecdc3;
   --text-muted: #8f8d87;

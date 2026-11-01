@@ -28,7 +28,7 @@ Pick the `/archive/` layout with `archive_style`: `classic` (default), `ledger`,
 
 ## Fonts
 
-Pick a font pairing with `font_style` (theme settings, or `config.json` → `params.font_style`): `instrument` (default), `charter` (system fonts), `geist`, `garamond`, `baskerville`, `mono`, `bricolage`, or `paper` (self-hosted [Paper Mono](https://paper.design/mono)). The pairings live in `layouts/partials/fonts.html` (Google Fonts stylesheets) and the `[data-font]` blocks at the top of `static/css/main.css`.
+Pick a font pairing with `font_style` (theme settings, or `config.json` → `params.font_style`): `instrument` (default), `charter` (system fonts), `geist`, `garamond`, `baskerville`, `mono`, `bricolage`, `paper` (self-hosted [Paper Mono](https://paper.design/mono)), or one of the newer classic (`playfair`, `merriweather`, `crimson`), trendy (`fraunces`, `dmserif`, `jakarta`), and weird (`typewriter`, `syne`, `blackletter`), and automotive (`highway`, `futura`, `dashboard`, `chrome`) pairings. The pairings live in `layouts/partials/fonts.html` (Google Fonts stylesheets) and the `[data-font]` blocks at the top of `static/css/main.css`.
 
 Add `?font=<name>` to any page URL to preview a pairing; it sticks for that browser tab and `?font=` clears it.
 

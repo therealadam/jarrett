@@ -8,7 +8,20 @@
   "baskerville" (print $g "family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400..700&display=swap")
   "mono" (print $g "family=Space+Grotesk:wght@400..700&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap")
   "paper" (relURL "css/paper-mono.css")
+  "playfair" (print $g "family=Playfair+Display:wght@400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=Source+Sans+3:wght@400..700&display=swap")
+  "merriweather" (print $g "family=Merriweather:ital,wght@0,400;0,700;1,400&family=Merriweather+Sans:wght@400..700&display=swap")
+  "crimson" (print $g "family=Crimson+Pro:ital,wght@0,400..700;1,400..700&family=Work+Sans:wght@400..700&display=swap")
+  "fraunces" (print $g "family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=Inter:wght@400..700&display=swap")
+  "dmserif" (print $g "family=DM+Serif+Display&family=DM+Serif+Text:ital@0;1&family=DM+Sans:wght@400..700&display=swap")
+  "jakarta" (print $g "family=Plus+Jakarta+Sans:wght@400..800&display=swap")
+  "typewriter" (print $g "family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap")
+  "syne" (print $g "family=Syne:wght@500..800&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap")
+  "blackletter" (print $g "family=UnifrakturCook:wght@700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Libre+Franklin:wght@400..700&display=swap")
   "bricolage" (print $g "family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap")
+  "highway" (print $g "family=Barlow:ital,wght@0,400;0,500;0,700;1,400&family=Barlow+Semi+Condensed:wght@500..700&display=swap")
+  "futura" (print $g "family=Jost:ital,wght@0,400..700;1,400..700&display=swap")
+  "dashboard" (print $g "family=Michroma&family=Saira:ital,wght@0,400..700;1,400..700&display=swap")
+  "chrome" (print $g "family=Yellowtail&family=Barlow:ital,wght@0,400;0,500;0,700;1,400&display=swap")
 -}}
 {{- $current := lower (trim (string (site.Params.font_style | default "instrument")) " ") -}}
 {{- if not (isset $options $current) -}}{{- $current = "instrument" -}}{{- end -}}
