@@ -1,0 +1,8 @@
+/* Paper Mono (https://paper.design/mono), SIL Open Font License 1.1; see ../fonts/PaperMono-OFL.txt */
+@font-face {
+  font-family: "Paper Mono";
+  src: url("../fonts/PaperMono-VF.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}

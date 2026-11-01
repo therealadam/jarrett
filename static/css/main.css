@@ -86,6 +86,14 @@
   --body-size: 1.15rem;
 }
 
+:root[data-font="paper"] {
+  --font-display: "Paper Mono", ui-monospace, monospace;
+  --font-serif: "Paper Mono", ui-monospace, monospace;
+  --font-sans: "Paper Mono", ui-monospace, monospace;
+  --display-weight: 700;
+  --body-size: 1rem;
+}
+
 :root[data-theme="dark"] {
   --text: #cecdc3;
   --text-muted: #8f8d87;

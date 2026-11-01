@@ -11,7 +11,7 @@
 		},
 		{
 			"field": "params.font_style",
-			"label": "Fonts: instrument, charter, geist, garamond, baskerville, mono, bricolage (try any on any page with ?font=<name>)",
+			"label": "Fonts: instrument, charter, geist, garamond, baskerville, mono, bricolage, paper (try any on any page with ?font=<name>)",
 			"placeholder": "instrument",
 			"type": "string"
 		},
