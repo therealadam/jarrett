@@ -1,7 +1,7 @@
-{{/* Archive page. The context is the layout name; unknown names fall back to classic so a typo can't break the build. */}}
+{{/* Archive page. The context is the layout name; unknown names fall back to rhythm so a typo can't break the build. */}}
 {{ $posts := (where site.RegularPages "Type" "post").ByDate.Reverse }}
 {{ $style := lower (trim (string .) " ") }}
-{{ if not (templates.Exists (printf "partials/archive/%s.html" $style)) }}{{ $style = "classic" }}{{ end }}
+{{ if not (templates.Exists (printf "partials/archive/%s.html" $style)) }}{{ $style = "rhythm" }}{{ end }}
 <div class="archive archive-{{ $style }} h-feed">
   <h2 class="archive-title p-name">Archive</h2>
   {{ if in (slice "ledger" "rhythm" "lanes") $style }}

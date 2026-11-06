@@ -6,7 +6,7 @@
 		{
 			"field": "params.archive_style",
 			"label": "Archive layout: classic, ledger, rhythm, lanes, almanac, index, quilt, receipt (preview each at /archive/<layout>/)",
-			"placeholder": "classic",
+			"placeholder": "rhythm",
 			"type": "string"
 		},
 		{

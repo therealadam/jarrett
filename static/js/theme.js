@@ -19,7 +19,7 @@
 
   apply(stored());
 
-  var options = { fonts: {}, archives: [], archive: "classic", archivePath: "/archive/", layouts: [] };
+  var options = { fonts: {}, archives: [], archive: "rhythm", archivePath: "/archive/", layouts: [] };
   try {
     options = JSON.parse(document.getElementById("theme-options").textContent);
   } catch (e) {}

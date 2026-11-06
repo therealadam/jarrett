@@ -1,7 +1,7 @@
 {
 	"paginate": 20,
 	"params": {
-		"archive_style": "classic",
+		"archive_style": "rhythm",
 		"font_style": "instrument",
 		"layout_style": "masthead"
 	},

@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   {{ with index $fonts.options $fonts.current }}<link rel="stylesheet" id="font-css" href="{{ . }}">{{ end }}
   {{ $archives := slice "classic" "ledger" "rhythm" "lanes" "almanac" "index" "quilt" "receipt" }}
-  {{ $archive := lower (trim (string (site.Params.archive_style | default "classic")) " ") }}
-  {{ if not (in $archives $archive) }}{{ $archive = "classic" }}{{ end }}
+  {{ $archive := lower (trim (string (site.Params.archive_style | default "rhythm")) " ") }}
+  {{ if not (in $archives $archive) }}{{ $archive = "rhythm" }}{{ end }}
   {{ $layouts := partial "site-layout.html" . }}
   <script type="application/json" id="theme-options">{{ dict "fonts" $fonts.options "archives" $archives "archive" $archive "archivePath" ("archive/" | relURL) "layouts" $layouts.options | jsonify | safeJS }}</script>
   <link rel="stylesheet" href="{{ "css/main.css" | relURL }}?{{ .Site.Params.theme_seconds }}">

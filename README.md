@@ -20,7 +20,7 @@ A custom [micro.blog](https://micro.blog) theme, synced via GitHub.
 
 ## Archive layout
 
-Pick the `/archive/` layout with `archive_style`: `classic` (default), `ledger`, `rhythm`, `lanes`, `almanac`, `index`, `quilt`, or `receipt`. Unknown values fall back to `classic`.
+Pick the `/archive/` layout with `archive_style`: `classic`, `ledger`, `rhythm` (default), `lanes`, `almanac`, `index`, `quilt`, or `receipt`. Unknown values fall back to `rhythm`.
 
 - **Theme settings:** `plugin.json` declares the field, so micro.blog shows it under the theme's settings.
 - **Theme config:** change the default in `config.json` → `params.archive_style`.
