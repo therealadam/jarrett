@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="post h-entry {{ range .Params.categories }}{{ . | urlize | lower }} {{ end }}">
+  {{ if or .Title .Params.audio }}
   <header class="post-header">
-    <a href="{{ .Permalink }}" class="post-date u-url"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02 15:04:05 -0700" }}">{{ .Date.Format "Jan 2, 2006" }}</time></a>
     {{ with .Params.audio }}
     <script type="text/javascript" src="https://micro.blog/narration.js?url={{ . }}"></script>
     {{ end }}
@@ -9,18 +9,34 @@
     <h2 class="p-name">{{ .Title }}</h2>
     {{ end }}
   </header>
+  {{ end }}
 
   <article class="post-content e-content">
     {{ .Content }}
   </article>
 
-  {{ with .GetTerms "categories" }}
-  <ul class="post-tags">
-    {{ range . }}
-    <li><a href="{{ .RelPermalink }}" class="category">{{ .LinkTitle }}</a></li>
+  <footer class="post-footer">
+    {{/* An approximate age, not the date (CAL-65). Micro.blog only rebuilds when something is published,
+         so theme.js recomputes the label in the browser with the same thresholds. Keep the two in sync. */}}
+    {{ $days := div (now.Sub .Date).Hours 24 }}
+    {{ $label := "Decades ago" }}
+    {{ if lt $days 4 }}{{ $label = "Just now" }}
+    {{ else if lt $days 7 }}{{ $label = "Several days ago" }}
+    {{ else if lt $days 14 }}{{ $label = "A fortnight ago" }}
+    {{ else if lt $days 30 }}{{ $label = "A few weeks ago" }}
+    {{ else if lt $days 90 }}{{ $label = "Several weeks ago" }}
+    {{ else if lt $days 360 }}{{ $label = "Months ago" }}
+    {{ else if lt $days 3650 }}{{ $label = "Years ago" }}
     {{ end }}
-  </ul>
-  {{ end }}
+    <a href="{{ .Permalink }}" class="post-date u-url"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" title="{{ .Date.Format "January 2, 2006" }}" data-approximate>{{ $label }}</time></a>
+    {{ with .GetTerms "categories" }}
+    <ul class="post-tags">
+      {{ range . }}
+      <li><a href="{{ .RelPermalink }}" class="category">{{ .LinkTitle }}</a></li>
+      {{ end }}
+    </ul>
+    {{ end }}
+  </footer>
 </div>
 
 {{ if templates.Exists "partials/reply-by-email.html" }}

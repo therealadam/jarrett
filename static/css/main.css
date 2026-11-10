@@ -392,13 +392,56 @@ input:focus-visible {
   border-bottom: none;
 }
 
-.post-date,
-.post-header .post-date {
+.post-date {
   font-family: var(--font-sans);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
+}
+
+.post-footer {
+  margin-top: 24px;
+}
+
+/* The approximate age; hovering shows the real date from its title. */
+.post-date time[title] {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+/* An untitled note's "#" link; "permalink" slides out on hover, like the theme switcher's labels. */
+.post-permalink {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.post-permalink:hover {
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+
+.post-permalink-word {
+  display: inline-block;
+  vertical-align: bottom;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 0.25s ease, margin-left 0.25s ease, opacity 0.2s ease;
+}
+
+.post-permalink:hover .post-permalink-word,
+.post-permalink:focus-visible .post-permalink-word {
+  max-width: 8em;
+  margin-left: 4px;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-permalink-word {
+    transition: none;
+  }
 }
 
 .post-title {

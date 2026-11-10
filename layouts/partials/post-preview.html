@@ -1,7 +1,8 @@
 <div class="post-preview h-entry {{ range .Params.categories }}{{ . | urlize | lower }} {{ end }}">
-  <a href="{{ .Permalink }}" class="post-date u-url"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02 15:04:05 -0700" }}">{{ .Date.Format "Jan 2, 2006" }}</time></a>
+  {{/* Listings show no dates (CAL-65); the hidden time keeps the h-entry's publish date for feed readers. */}}
+  <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" hidden></time>
   {{ if .Title }}
-  <h2 class="post-title p-name"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+  <h2 class="post-title p-name"><a href="{{ .Permalink }}" class="u-url">{{ .Title }}</a></h2>
   {{ end }}
   {{ if in .RawContent "<!--more-->" }}
   <div class="p-summary">
@@ -17,5 +18,9 @@
   <div class="e-content">
     {{ .Content }}
   </div>
+  {{ end }}
+  {{ if not .Title }}
+  {{/* Untitled notes have no title to click, so link to the post here instead of from the date. */}}
+  <a href="{{ .Permalink }}" class="post-date post-permalink u-url" aria-label="Permalink">#<span class="post-permalink-word" aria-hidden="true">permalink</span></a>
   {{ end }}
 </div>

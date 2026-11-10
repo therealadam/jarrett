@@ -135,7 +135,32 @@
     return get("tinker") === "1";
   }
 
+  // Approximate post ages (CAL-65). The build renders the same labels from layouts/post/single.html,
+  // but the site is static, so recompute them against today's date. Keep the thresholds in sync.
+  var ages = [
+    [4, "Just now"],
+    [7, "Several days ago"],
+    [14, "A fortnight ago"],
+    [30, "A few weeks ago"],
+    [90, "Several weeks ago"],
+    [360, "Months ago"],
+    [3650, "Years ago"]
+  ];
+
+  function ageLabel(published) {
+    var days = (Date.now() - published) / 86400000;
+    for (var i = 0; i < ages.length; i++) {
+      if (days < ages[i][0]) return ages[i][1];
+    }
+    return "Decades ago";
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("time[data-approximate]").forEach(function (time) {
+      var published = Date.parse(time.dateTime);
+      if (!isNaN(published)) time.textContent = ageLabel(published);
+    });
+
     var buttons = document.querySelectorAll(".theme-switcher button");
     var toolbar = null;
     var badge = null;
