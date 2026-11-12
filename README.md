@@ -48,16 +48,29 @@ Every layout uses the same markup; each is a `[data-layout]` block in `main.css`
 
 Add `?layout=<name>` to any page URL to preview one; like `?font=`, it sticks for the tab and `?layout=` clears it.
 
+## Colors
+
+Pick a color scheme with `color_style` (theme settings, or `config.json` → `params.color_style`). Each has a light and a dark palette, so the Day / Night / System switcher works with all of them. Unknown values fall back to `flexoki`.
+
+- `flexoki` (default) — warm paper and Flexoki accents; deep purple at night
+- `solarized` — Solarized light and dark
+- `nord` — Nord's cool blues: Snow Storm by day, Polar Night after dark
+- `rosepine` — Rosé Pine Dawn by day, Rosé Pine at night
+- `newsprint` — black ink on newsprint with red links and a red top rule
+
+Flexoki is the `:root` palette at the top of `main.css`; the others are `[data-colors]` blocks right after it, and the list lives in `layouts/partials/colors.html`. Each scheme repeats its dark palette twice, once for the system setting and once for the Night button. Add `?colors=<name>` to any page URL to preview one; like `?font=`, it sticks for the tab and `?colors=` clears it.
+
 ## Tinker mode
 
-A toolbar for trying the font pairings and archive layouts without touching settings. Open it with `?tinker` on any page or by pressing `t` (ignored while typing or with a modifier held); close it with `t`, `Esc`, the × button, or `?tinker=off`. It stays open for that browser tab.
+A toolbar for trying the font pairings, page layouts, color schemes, and archive layouts without touching settings. Open it with the wrench next to the Day / Night / System buttons, with `?tinker` on any page, or by pressing `t` (ignored while typing or with a modifier held); close it with the wrench, `t`, `Esc`, the × button, or `?tinker=off`. It stays open for that browser tab.
 
 - **Font** applies a pairing live (same as `?font=`).
 - **Layout** applies a page layout live (same as `?layout=`).
+- **Colors** applies a color scheme live (same as `?colors=`); the Day / Night / System switcher still picks light or dark.
 - **Archive** swaps in the chosen layout on `/archive/` without reloading (it fetches `/archive/<layout>/`); elsewhere it jumps to that preview page. The pick sticks for the tab.
-- **Reset** returns to the site's configured font, page layout, and archive layout.
+- **Reset** returns to the site's configured font, page layout, color scheme, and archive layout.
 
-It's all in `static/js/theme.js` (toolbar built on demand) and the `.tinker` block in `main.css`. The fonts, page layouts, and archive list reach the script through the `theme-options` JSON in `layouts/partials/head.html`; add a new archive layout to that list too.
+It's all in `static/js/theme.js` (toolbar built on demand) and the `.tinker` block in `main.css`. The fonts, page layouts, color schemes, and archive list reach the script through the `theme-options` JSON in `layouts/partials/head.html`; add a new archive layout to that list too.
 
 ## Buttondown
 

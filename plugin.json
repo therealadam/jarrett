@@ -20,6 +20,12 @@
 			"label": "Page layout (header, navigation, footer): sidebar, centered, masthead, nameplate, minimal, spine, palette (try any with tinker mode: ?tinker or press t)",
 			"placeholder": "masthead",
 			"type": "string"
+		},
+		{
+			"field": "params.color_style",
+			"label": "Color scheme, each with a light and dark palette: flexoki, solarized, nord, rosepine, newsprint (try any with tinker mode: ?tinker or press t)",
+			"placeholder": "flexoki",
+			"type": "string"
 		}
 	]
 }

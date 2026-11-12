@@ -19,13 +19,14 @@
 
   apply(stored());
 
-  var options = { fonts: {}, archives: [], archive: "rhythm", archivePath: "/archive/", layouts: [] };
+  var options = { fonts: {}, archives: [], archive: "rhythm", archivePath: "/archive/", layouts: [], colors: [] };
   try {
     options = JSON.parse(document.getElementById("theme-options").textContent);
   } catch (e) {}
   var fonts = options.fonts;
   var siteFont = root.getAttribute("data-font");
   var siteLayout = root.getAttribute("data-layout");
+  var siteColors = root.getAttribute("data-colors");
 
   function get(key) {
     try {
@@ -61,7 +62,7 @@
 
   // Previews stick for the browser tab (sessionStorage).
   // ?font=<name> tries a pairing from the theme's font list; ?font= clears it.
-  // ?layout=<name> does the same for page layouts.
+  // ?layout=<name> does the same for page layouts, and ?colors=<name> for color schemes.
   // ?tinker opens the tinker toolbar (press t to toggle it); ?tinker=off closes it.
   var query = new URLSearchParams(location.search);
   var fontParam = query.get("font");
@@ -71,6 +72,10 @@
   var layoutParam = query.get("layout");
   if (layoutParam !== null) {
     set("layout", options.layouts.indexOf(layoutParam) !== -1 && layoutParam !== siteLayout ? layoutParam : null);
+  }
+  var colorsParam = query.get("colors");
+  if (colorsParam !== null) {
+    set("colors", options.colors.indexOf(colorsParam) !== -1 && colorsParam !== siteColors ? colorsParam : null);
   }
   var tinkerParam = query.get("tinker");
   if (tinkerParam !== null) {
@@ -89,6 +94,13 @@
     root.setAttribute("data-layout", previewLayout);
   } else {
     previewLayout = null;
+  }
+
+  var previewColors = get("colors");
+  if (previewColors && options.colors.indexOf(previewColors) !== -1) {
+    root.setAttribute("data-colors", previewColors);
+  } else {
+    previewColors = null;
   }
 
   // Archive layouts are rendered by the server, so trying one means fetching its preview page
@@ -161,7 +173,8 @@
       if (!isNaN(published)) time.textContent = ageLabel(published);
     });
 
-    var buttons = document.querySelectorAll(".theme-switcher button");
+    var buttons = document.querySelectorAll(".theme-switcher button[data-theme]");
+    var tinkerToggle = document.querySelector(".tinker-toggle");
     var toolbar = null;
     var badge = null;
 
@@ -174,13 +187,14 @@
     function renderBadge() {
       if (badge) badge.remove();
       badge = null;
-      if (!(previewFont || previewLayout) || toolbar) return;
+      if (!(previewFont || previewLayout || previewColors) || toolbar) return;
       var parts = [];
       if (previewFont) parts.push("font: " + previewFont);
       if (previewLayout) parts.push("layout: " + previewLayout);
+      if (previewColors) parts.push("colors: " + previewColors);
       badge = document.createElement("a");
       badge.className = "font-preview-badge";
-      badge.href = "?font=&layout=";
+      badge.href = "?font=&layout=&colors=";
       badge.textContent = "Preview " + parts.join(", ") + " ×";
       badge.setAttribute("aria-label", "Preview " + parts.join(", ") + ". Clear preview");
       document.body.appendChild(badge);
@@ -226,6 +240,12 @@
         root.setAttribute("data-layout", name);
       });
 
+      var colors = field("Colors", options.colors, root.getAttribute("data-colors"), function (name) {
+        previewColors = name === siteColors ? null : name;
+        set("colors", previewColors);
+        root.setAttribute("data-colors", name);
+      });
+
       var archive = field("Archive", options.archives, get("archive") || currentArchive(), function (style) {
         set("archive", style === options.archive ? null : style);
         showArchive(style);
@@ -237,13 +257,17 @@
       reset.addEventListener("click", function () {
         previewFont = null;
         previewLayout = null;
+        previewColors = null;
         set("font", null);
         set("layout", null);
+        set("colors", null);
         set("archive", null);
         applyFont(siteFont);
         root.setAttribute("data-layout", siteLayout);
+        root.setAttribute("data-colors", siteColors);
         font.select.value = siteFont;
         layout.select.value = siteLayout;
+        colors.select.value = siteColors;
         archive.select.value = options.archive;
         if (archiveEl() && currentArchive() !== options.archive) showArchive(options.archive);
       });
@@ -255,8 +279,9 @@
       close.title = "Close (t)";
       close.addEventListener("click", closeTinker);
 
-      toolbar.append(title, font.wrap, layout.wrap, archive.wrap, reset, close);
+      toolbar.append(title, font.wrap, layout.wrap, colors.wrap, archive.wrap, reset, close);
       document.body.appendChild(toolbar);
+      if (tinkerToggle) tinkerToggle.setAttribute("aria-pressed", "true");
       renderBadge();
     }
 
@@ -265,7 +290,15 @@
       set("tinker", null);
       toolbar.remove();
       toolbar = null;
+      if (tinkerToggle) tinkerToggle.setAttribute("aria-pressed", "false");
       renderBadge();
+    }
+
+    // The wrench in the theme switcher toggles the toolbar, like the t key.
+    if (tinkerToggle) {
+      tinkerToggle.addEventListener("click", function () {
+        toolbar ? closeTinker() : openTinker();
+      });
     }
 
     // The palette layout swaps the header nav for a "Go to" button that opens a filterable list

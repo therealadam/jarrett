@@ -228,6 +228,164 @@
   --rainbow: linear-gradient(90deg, #d14d41, #da702c, #d0a215, #879a39, #3aa99f, #4385be, #8b7ec8, #ce5d97);
 }
 
+/* Color schemes (params.color_style; see layouts/partials/colors.html). The palettes above are flexoki.
+   Each scheme sets its light palette, then the same dark palette twice: once for the system setting, once for the Night button.
+   A few colors are nudged from the originals so text, links, and tags keep 4.5:1 contrast. */
+
+/* Solarized (Ethan Schoonover) */
+:root[data-colors="solarized"] {
+  --text: #073642;
+  --text-muted: #586e75;
+  --bg: #fdf6e3;
+  --accent: #b5410f;
+  --accent-hover: #5b60b5;
+  --tag: #1b7d76;
+  --selection: #eee8d5;
+  --border: #eee8d5;
+  --rainbow: linear-gradient(90deg, #dc322f, #cb4b16, #b58900, #859900, #2aa198, #268bd2, #6c71c4, #d33682);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-colors="solarized"]:not([data-theme="light"]) {
+    --text: #eee8d5;
+    --text-muted: #93a1a1;
+    --bg: #002b36;
+    --accent: #b58900;
+    --accent-hover: #e86aa6;
+    --tag: #2aa198;
+    --selection: #073642;
+    --border: #073642;
+  }
+}
+
+:root[data-colors="solarized"][data-theme="dark"] {
+  --text: #eee8d5;
+  --text-muted: #93a1a1;
+  --bg: #002b36;
+  --accent: #b58900;
+  --accent-hover: #e86aa6;
+  --tag: #2aa198;
+  --selection: #073642;
+  --border: #073642;
+}
+
+/* Nord (Arctic Ice Studio): Snow Storm paper with darkened Frost blues by day, Polar Night after dark */
+:root[data-colors="nord"] {
+  --text: #2e3440;
+  --text-muted: #4c566a;
+  --bg: #eceff4;
+  --accent: #3b6a9a;
+  --accent-hover: #8a4f7d;
+  --tag: #3d7468;
+  --selection: #d8dee9;
+  --border: #d8dee9;
+  --rainbow: linear-gradient(90deg, #8fbcbb, #88c0d0, #81a1c1, #5e81ac);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-colors="nord"]:not([data-theme="light"]) {
+    --text: #eceff4;
+    --text-muted: #a3abba;
+    --bg: #2e3440;
+    --accent: #88c0d0;
+    --accent-hover: #c39cbc;
+    --tag: #a3be8c;
+    --selection: #434c5e;
+    --border: #3b4252;
+    --rainbow: linear-gradient(90deg, #8fbcbb, #88c0d0, #81a1c1, #5e81ac);
+  }
+}
+
+:root[data-colors="nord"][data-theme="dark"] {
+  --text: #eceff4;
+  --text-muted: #a3abba;
+  --bg: #2e3440;
+  --accent: #88c0d0;
+  --accent-hover: #c39cbc;
+  --tag: #a3be8c;
+  --selection: #434c5e;
+  --border: #3b4252;
+  --rainbow: linear-gradient(90deg, #8fbcbb, #88c0d0, #81a1c1, #5e81ac);
+}
+
+/* Rosé Pine: Dawn in light mode, the original in dark */
+:root[data-colors="rosepine"] {
+  --text: #4f4a70;
+  --text-muted: #6a6585;
+  --bg: #faf4ed;
+  --accent: #a3546b;
+  --accent-hover: #286983;
+  --tag: #77609d;
+  --selection: #dfdad9;
+  --border: #dfdad9;
+  --rainbow: linear-gradient(90deg, #b4637a, #d7827e, #ea9d34, #56949f, #286983, #907aa9);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-colors="rosepine"]:not([data-theme="light"]) {
+    --text: #e0def4;
+    --text-muted: #908caa;
+    --bg: #191724;
+    --accent: #ebbcba;
+    --accent-hover: #9ccfd8;
+    --tag: #c4a7e7;
+    --selection: #403d52;
+    --border: #26233a;
+    --rainbow: linear-gradient(90deg, #eb6f92, #ebbcba, #f6c177, #9ccfd8, #31748f, #c4a7e7);
+  }
+}
+
+:root[data-colors="rosepine"][data-theme="dark"] {
+  --text: #e0def4;
+  --text-muted: #908caa;
+  --bg: #191724;
+  --accent: #ebbcba;
+  --accent-hover: #9ccfd8;
+  --tag: #c4a7e7;
+  --selection: #403d52;
+  --border: #26233a;
+  --rainbow: linear-gradient(90deg, #eb6f92, #ebbcba, #f6c177, #9ccfd8, #31748f, #c4a7e7);
+}
+
+/* Newsprint: black ink on newsprint with a red masthead rule; white on near-black at night */
+:root[data-colors="newsprint"] {
+  --text: #1a1a1a;
+  --text-muted: #5f5d58;
+  --bg: #f4f1ea;
+  --accent: #c8102e;
+  --accent-hover: #1a1a1a;
+  --tag: #1d4f91;
+  --selection: #e2ddd0;
+  --border: #dcd6c8;
+  --rainbow: #c8102e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-colors="newsprint"]:not([data-theme="light"]) {
+    --text: #e6e2d8;
+    --text-muted: #9a968c;
+    --bg: #161514;
+    --accent: #ff6b5b;
+    --accent-hover: #e6e2d8;
+    --tag: #8fb8e8;
+    --selection: #34312c;
+    --border: #2c2a27;
+    --rainbow: #ff6b5b;
+  }
+}
+
+:root[data-colors="newsprint"][data-theme="dark"] {
+  --text: #e6e2d8;
+  --text-muted: #9a968c;
+  --bg: #161514;
+  --accent: #ff6b5b;
+  --accent-hover: #e6e2d8;
+  --tag: #8fb8e8;
+  --selection: #34312c;
+  --border: #2c2a27;
+  --rainbow: #ff6b5b;
+}
+
 :not(pre) > code {
   font-family: var(--font-code, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
   font-size: 0.8em;
@@ -700,6 +858,11 @@ input:focus-visible {
   background: var(--selection);
 }
 
+/* The tinker wrench sits a little apart from Day / Night / System. */
+.theme-switcher .tinker-toggle {
+  margin-left: 6px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .theme-switcher .label,
   .theme-switcher button {
@@ -1030,6 +1193,10 @@ input:focus-visible {
   :root[data-layout="spine"] .theme-switcher {
     flex-direction: column;
     margin-top: 20px;
+  }
+
+  :root[data-layout="spine"] .theme-switcher .tinker-toggle {
+    margin: 6px 0 0;
   }
 
   :root[data-layout="spine"] .theme-switcher .label {

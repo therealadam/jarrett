@@ -3,7 +3,8 @@
 	"params": {
 		"archive_style": "rhythm",
 		"font_style": "instrument",
-		"layout_style": "masthead"
+		"layout_style": "masthead",
+		"color_style": "flexoki"
 	},
 	"outputFormats": {
 		"RSS": {
