@@ -1,5 +1,5 @@
 {{- /* Color schemes, each with a light and a dark palette: returns the names and the one chosen in params.color_style. flexoki is the :root palette; the others are [data-colors] blocks in static/css/main.css. */ -}}
-{{- $options := slice "flexoki" "solarized" "nord" "rosepine" "newsprint" -}}
+{{- $options := slice "flexoki" "solarized" "nord" "rosepine" "newsprint" "martini" "gulf" -}}
 {{- $current := lower (trim (string (site.Params.color_style | default "flexoki")) " ") -}}
 {{- if not (in $options $current) -}}{{- $current = "flexoki" -}}{{- end -}}
 {{- return (dict "options" $options "current" $current) -}}

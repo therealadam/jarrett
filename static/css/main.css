@@ -386,6 +386,83 @@
   --rainbow: #ff6b5b;
 }
 
+/* Martini Racing (the Porsche 935): off-white and deep black, with the livery's red, light blue, and navy as accents */
+:root[data-colors="martini"] {
+  --text: #111111;
+  --text-muted: #5c5a55;
+  --bg: #faf8f3;
+  --accent: #c8202b;
+  --accent-hover: #1d6aa8;
+  --tag: #0b3a6e;
+  --selection: #e6ebf2;
+  --border: #e7e4dc;
+  /* The top stripe stacks every livery color, 3px each, in light and dark. */
+  --stripe-height: 12px;
+  --rainbow: linear-gradient(180deg, #0b2a4a 0 25%, #3aa0dc 25% 50%, #d52b1e 50% 75%, #ffffff 75%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-colors="martini"]:not([data-theme="light"]) {
+    --text: #ece9e2;
+    --text-muted: #9a978f;
+    --bg: #0a0a0a;
+    --accent: #ff5a4f;
+    --accent-hover: #4fb3ea;
+    --tag: #7fa6d6;
+    --selection: #172233;
+    --border: #1c1c1c;
+  }
+}
+
+:root[data-colors="martini"][data-theme="dark"] {
+  --text: #ece9e2;
+  --text-muted: #9a978f;
+  --bg: #0a0a0a;
+  --accent: #ff5a4f;
+  --accent-hover: #4fb3ea;
+  --tag: #7fa6d6;
+  --selection: #172233;
+  --border: #1c1c1c;
+}
+
+/* Gulf (the Porsche 917K): off-white and deep black, with the livery's orange and powder blue as accents (orange darkens a little for readable links by day) */
+:root[data-colors="gulf"] {
+  --text: #111111;
+  --text-muted: #5c5a55;
+  --bg: #faf8f3;
+  --accent: #b84a0c;
+  --accent-hover: #2a6f9e;
+  --tag: #1d5a85;
+  --selection: #e3eef5;
+  --border: #e7e4dc;
+  --stripe-height: 12px;
+  --rainbow: linear-gradient(180deg, #9fd0ee 0 25%, #f26b21 25% 50%, #111111 50% 75%, #ffffff 75%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-colors="gulf"]:not([data-theme="light"]) {
+    --text: #ece9e2;
+    --text-muted: #9a978f;
+    --bg: #0a0a0a;
+    --accent: #ff7a2e;
+    --accent-hover: #c4e3f5;
+    --tag: #9fd0ee;
+    --selection: #1c2730;
+    --border: #1c1c1c;
+  }
+}
+
+:root[data-colors="gulf"][data-theme="dark"] {
+  --text: #ece9e2;
+  --text-muted: #9a978f;
+  --bg: #0a0a0a;
+  --accent: #ff7a2e;
+  --accent-hover: #c4e3f5;
+  --tag: #9fd0ee;
+  --selection: #1c2730;
+  --border: #1c1c1c;
+}
+
 :not(pre) > code {
   font-family: var(--font-code, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
   font-size: 0.8em;
@@ -416,7 +493,7 @@ body::before {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: var(--stripe-height, 4px);
   background: var(--rainbow);
   pointer-events: none;
   z-index: 10;

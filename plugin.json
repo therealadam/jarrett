@@ -23,7 +23,7 @@
 		},
 		{
 			"field": "params.color_style",
-			"label": "Color scheme, each with a light and dark palette: flexoki, solarized, nord, rosepine, newsprint (try any with tinker mode: ?tinker or press t)",
+			"label": "Color scheme, each with a light and dark palette: flexoki, solarized, nord, rosepine, newsprint, martini, gulf (try any with tinker mode: ?tinker or press t)",
 			"placeholder": "flexoki",
 			"type": "string"
 		}

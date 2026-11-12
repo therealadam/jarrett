@@ -57,6 +57,8 @@ Pick a color scheme with `color_style` (theme settings, or `config.json` → `pa
 - `nord` — Nord's cool blues: Snow Storm by day, Polar Night after dark
 - `rosepine` — Rosé Pine Dawn by day, Rosé Pine at night
 - `newsprint` — black ink on newsprint with red links and a red top rule
+- `martini` — off-white / deep black with the Martini Racing livery's red, light blue, and navy as accents
+- `gulf` — off-white / deep black with the Gulf livery's orange and powder blue as accents
 
 Flexoki is the `:root` palette at the top of `main.css`; the others are `[data-colors]` blocks right after it, and the list lives in `layouts/partials/colors.html`. Each scheme repeats its dark palette twice, once for the system setting and once for the Night button. Add `?colors=<name>` to any page URL to preview one; like `?font=`, it sticks for the tab and `?colors=` clears it.
 
